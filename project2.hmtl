@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Project 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #fff;
+      background: #007bff;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .back:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>Project 2 – Automasi Data dengan n8n</h1>
+
+<img src="project2.jpg" alt="Project 2">
+
+<p>
+  <strong>Automasi Proses Data Menggunakan n8n</strong><br><br>
+  Project ini berfokus pada automasi alur kerja data menggunakan n8n
+  untuk mengintegrasikan berbagai sumber data dan meningkatkan efisiensi operasional.
+</p>
+
+<h2>Proses & Insight Utama</h2>
+
+<ul style="line-height: 1.7; padding-left: 20px;">
+  <li>
+    <strong>Workflow Automation:</strong>
+    Membuat workflow otomatis untuk pengambilan, pemrosesan, dan distribusi data.
+  </li>
+  <li>
+    <strong>Integrasi API:</strong>
+    Menghubungkan berbagai layanan seperti Google Sheets, Google Drive, Gmail, dan OpenAI.
+  </li>
+  <li>
+    <strong>Error Handling:</strong>
+    Menangani error otomatis untuk menjaga kestabilan sistem.
+  </li>
+</ul>
+
+  <p>
+    Proyek ini dibuat untuk membantu HR atau tim SDM rekrutmen untuk menilai CV pelamar secara cepat dan objektif dengan <strong>Bantuan AI</strong>. Adapun fungsinya Membuat sistem berbasis AI yang <em>menganalisis</em> CV pelamar kerja dan memberikan penilaian otomatis.
+    
+  </p>
+
+  <a href="index.html" class="back">← Kembali ke Beranda</a>
+</div>
+
+</body>
+</html>
