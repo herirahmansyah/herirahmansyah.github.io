@@ -163,19 +163,24 @@ footer {
 }
 /* Responsif */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        display: none;
-    }
-    nav ul.show {
-        display: flex;
-    }
-    .about-content {
-        flex-direction: column;
+  nav ul {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    display: none;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  .about-content {
+    flex-direction: column;
+  }
+}
+
 
 
