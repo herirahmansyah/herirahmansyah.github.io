@@ -1,28 +1,22 @@
-// Toggle menu untuk mobile
+// Toggle menu mobile (opsional)
 const navToggle = document.querySelector('nav ul');
 navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('show');
+  navToggle.classList.toggle('show');
 });
 
-// Animasi fade-in saat scroll
-const sections = document.querySelectorAll('.section');
-const observer = new IntersectionObserver((entries) => {
+// Intersection Observer untuk animasi scroll
+const observer = new IntersectionObserver(
+  entries => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
     });
-}, { threshold: 0.1 });
+  },
+  { threshold: 0.15 }
+);
 
-
-sections.forEach(section => observer.observe(section));
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
+// Observe semua elemen animasi
+document.querySelectorAll('.fade-up, .section').forEach(el => {
+  observer.observe(el);
 });
-
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
