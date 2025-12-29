@@ -147,6 +147,13 @@ footer {
   text-align: center;
   padding: 1rem;
 }
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2, #357abd);
+  border-radius: 6px;
+  transition: width 1.2s ease;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -163,4 +170,5 @@ footer {
     flex-direction: column;
   }
 }
+
 
