@@ -3,6 +3,11 @@ const navToggle = document.querySelector('nav ul');
 navToggle.addEventListener('click', () => {
   navToggle.classList.toggle('show');
 });
+const darkToggle = document.getElementById('darkToggle');
+
+darkToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+});
 
 // Intersection Observer untuk animasi scroll
 const observer = new IntersectionObserver(
@@ -45,5 +50,6 @@ skillObserver.observe(skillSection);
 document.querySelectorAll('.fade-up, .section').forEach(el => {
   observer.observe(el);
 });
+
 
 
