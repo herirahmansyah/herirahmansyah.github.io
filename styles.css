@@ -212,6 +212,13 @@ footer {
   border-radius: 6px;
   transition: width 1.2s ease;
 }
+.social-links i {
+  font-size: 30px;
+}
+body.dark .social-links i {
+  color: #f5f5f5;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -228,6 +235,7 @@ footer {
     flex-direction: column;
   }
 }
+
 
 
 
