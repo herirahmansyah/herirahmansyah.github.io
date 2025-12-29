@@ -50,6 +50,26 @@ skillObserver.observe(skillSection);
 document.querySelectorAll('.fade-up, .section').forEach(el => {
   observer.observe(el);
 });
+const modal = document.getElementById("certModal");
+const modalImg = document.getElementById("certImage");
+
+document.querySelectorAll(".open-cert").forEach(btn => {
+  btn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    modalImg.src = btn.dataset.img;
+  });
+});
+
+document.querySelector(".cert-modal .close").addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+modal.addEventListener("click", e => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 
 
 
