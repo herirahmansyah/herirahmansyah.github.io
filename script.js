@@ -24,8 +24,26 @@ document.querySelectorAll('.progress').forEach(bar => {
   }, 500);
 });
 
+const skillSection = document.querySelector('#skills');
+const skillBars = document.querySelectorAll('.progress');
+
+const skillObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      skillBars.forEach(bar => {
+        const value = bar.dataset.progress;
+        bar.style.width = value + '%';
+      });
+      skillObserver.disconnect(); // hanya sekali
+    }
+  });
+}, { threshold: 0.4 });
+
+skillObserver.observe(skillSection);
+
 // Observe semua elemen animasi
 document.querySelectorAll('.fade-up, .section').forEach(el => {
   observer.observe(el);
 });
+
 
