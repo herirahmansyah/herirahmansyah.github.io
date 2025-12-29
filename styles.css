@@ -22,6 +22,19 @@ body.dark {
   color: #eaeaea;
 }
 
+body.dark .hero-content h1,
+body.dark .hero-content p {
+  color: #ffffff;
+}
+
+body.dark .hero-content span {
+  color: #4a90e2;
+}
+
+body.dark .hero {
+  background: linear-gradient(135deg, #121212, #1f1f1f);
+}
+
 body.dark header {
   background: #1e1e1e;
 }
@@ -197,6 +210,7 @@ footer {
     flex-direction: column;
   }
 }
+
 
 
 
