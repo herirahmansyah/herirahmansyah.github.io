@@ -1,75 +1,93 @@
-// Toggle menu mobile (opsional)
-const navToggle = document.querySelector('nav ul');
-navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('show');
-});
-const darkToggle = document.getElementById('darkToggle');
+document.addEventListener("DOMContentLoaded", () => {
 
-darkToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-});
+  /* =========================
+     MOBILE NAV
+  ========================= */
+  const navToggle = document.querySelector("nav ul");
+  if (navToggle) {
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("show");
+    });
+  }
 
-// Intersection Observer untuk animasi scroll
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
+  /* =========================
+     DARK MODE
+  ========================= */
+  const darkToggle = document.getElementById("darkToggle");
+  if (darkToggle) {
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+  }
+
+  /* =========================
+     SCROLL ANIMATION
+  ========================= */
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll(".fade-up, .section").forEach(el => {
+    observer.observe(el);
+  });
+
+  /* =========================
+     SKILL PROGRESS BAR
+  ========================= */
+  const skillSection = document.querySelector("#skills");
+  const skillBars = document.querySelectorAll(".progress");
+
+  if (skillSection && skillBars.length > 0) {
+    const skillObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          skillBars.forEach(bar => {
+            const value = bar.dataset.progress;
+            bar.style.width = value + "%";
+          });
+          skillObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    skillObserver.observe(skillSection);
+  }
+
+  /* =========================
+     CERTIFICATE MODAL
+  ========================= */
+  const modal = document.getElementById("certModal");
+  const modalImg = document.getElementById("certImage");
+  const closeBtn = document.querySelector(".cert-modal .close");
+
+  document.querySelectorAll(".open-cert").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (modal && modalImg) {
+        modal.style.display = "flex";
+        modalImg.src = btn.dataset.img;
       }
     });
-  },
-  { threshold: 0.15 }
-);
-
-document.querySelectorAll('.progress').forEach(bar => {
-  const width = bar.style.width;
-  bar.style.width = '0';
-  setTimeout(() => {
-    bar.style.width = width;
-  }, 500);
-});
-
-const skillSection = document.querySelector('#skills');
-const skillBars = document.querySelectorAll('.progress');
-
-const skillObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      skillBars.forEach(bar => {
-        const value = bar.dataset.progress;
-        bar.style.width = value + '%';
-      });
-      skillObserver.disconnect(); // hanya sekali
-    }
   });
-}, { threshold: 0.4 });
 
-skillObserver.observe(skillSection);
-
-// Observe semua elemen animasi
-document.querySelectorAll('.fade-up, .section').forEach(el => {
-  observer.observe(el);
-});
-const modal = document.getElementById("certModal");
-const modalImg = document.getElementById("certImage");
-
-document.querySelectorAll(".open-cert").forEach(btn => {
-  btn.addEventListener("click", () => {
-    modal.style.display = "flex";
-    modalImg.src = btn.dataset.img;
-  });
-});
-
-document.querySelector(".cert-modal .close").addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-modal.addEventListener("click", e => {
-  if (e.target === modal) {
-    modal.style.display = "none";
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
   }
+
+  if (modal) {
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
+
 });
-
-
-
-
