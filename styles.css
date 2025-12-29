@@ -218,6 +218,50 @@ footer {
 body.dark .social-links i {
   color: #f5f5f5;
 }
+/* =========================
+   SOCIAL ICON BASE
+========================= */
+.social-links a {
+  color: #444;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links i {
+  font-size: 28px;
+}
+
+/* =========================
+   BRAND HOVER COLORS
+========================= */
+
+/* Instagram */
+.social-links a.ig:hover {
+  color: #e1306c;
+  transform: translateY(-6px);
+}
+
+/* Facebook */
+.social-links a.fb:hover {
+  color: #1877f2;
+  transform: translateY(-6px);
+}
+
+/* LinkedIn */
+.social-links a.in:hover {
+  color: #0a66c2;
+  transform: translateY(-6px);
+}
+
+/* Email */
+.social-links a.mail:hover {
+  color: #d44638;
+  transform: translateY(-6px);
+}
+
+/* Dark mode fix */
+body.dark .social-links a {
+  color: #f5f5f5;
+}
 
 
 /* Responsive */
@@ -235,9 +279,3 @@ body.dark .social-links i {
     flex-direction: column;
   }
 }
-
-
-
-
-
-
