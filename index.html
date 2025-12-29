@@ -104,7 +104,10 @@
         <img src="cert2.jpg" alt="Sertifikat Data Analyst">
         <h3>Data Analyst Certificate</h3>
         <p>Google Data Analytics – Coursera</p>
-        <a href="cert1.jpg" target="_blank" class="btn">Lihat Sertifikat</a>
+        <button class="btn open-cert" data-img="cert2.jpg">
+  Lihat Sertifikat
+</button>
+
       </div>
 
       <!-- Sertifikat 2 -->
@@ -112,7 +115,10 @@
         <img src="cert1.jpg" alt="Sertifikat AI Engineer">
         <h3>AI Engineer</h3>
         <p>Penerapan AI Untuk Proses Data – BNSP</p>
-        <a href="cert2.jpg" target="_blank" class="btn">Lihat Sertifikat</a>
+        <button class="btn open-cert" data-img="cert1.jpg">
+  Lihat Sertifikat
+</button>
+
       </div>
     </div>
   </div>
@@ -192,23 +198,16 @@
   </div>
 </section>
 
-
     <footer>
         <p>&copy; 2025 Heri Rahmansyah. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
+    <div class="cert-modal" id="certModal">
+  <span class="close">&times;</span>
+  <img id="certImage" src="" alt="Sertifikat">
+</div>
 </body>
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
