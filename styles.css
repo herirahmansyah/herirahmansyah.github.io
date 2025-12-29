@@ -218,6 +218,12 @@ footer {
 body.dark .social-links i {
   color: #f5f5f5;
 }
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
 /* =========================
    SOCIAL ICON BASE
 ========================= */
@@ -279,3 +285,4 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
+
