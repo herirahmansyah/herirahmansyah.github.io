@@ -10,6 +10,33 @@ body {
   color: #333;
   background: #f4f4f4;
 }
+.dark-toggle {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+body.dark {
+  background: #121212;
+  color: #eaeaea;
+}
+
+body.dark header {
+  background: #1e1e1e;
+}
+
+body.dark .section {
+  background: #121212;
+}
+
+body.dark .project {
+  background: #1f1f1f;
+}
+
+body.dark .progress-bar {
+  background: #333;
+}
 
 header {
   position: fixed;
@@ -170,5 +197,6 @@ footer {
     flex-direction: column;
   }
 }
+
 
 
