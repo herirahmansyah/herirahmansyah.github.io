@@ -1,9 +1,27 @@
-// Default DARK MODE saat pertama kali buka
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("dark");
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+  /* =========================
+     DARK MODE (DEFAULT + SAVE)
+  ========================= */
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    document.body.classList.remove("dark");
+  } else {
+    document.body.classList.add("dark"); // default DARK
+  }
+
+  const darkToggle = document.getElementById("darkToggle");
+  if (darkToggle) {
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+      );
+    });
+  }
 
   /* =========================
      MOBILE NAV
@@ -14,32 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.classList.toggle("show");
     });
   }
-
-  /* =========================
-     DARK MODE
-  ========================= */
- document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme === "light") {
-    document.body.classList.remove("dark");
-  } else {
-    document.body.classList.add("dark"); // default
-  }
-});
-
-const darkToggle = document.getElementById("darkToggle");
-
-darkToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  if (document.body.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
-  } else {
-    localStorage.setItem("theme", "light");
-  }
-});
-
 
   /* =========================
      SCROLL ANIMATION
@@ -70,8 +62,7 @@ darkToggle.addEventListener("click", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           skillBars.forEach(bar => {
-            const value = bar.dataset.progress;
-            bar.style.width = value + "%";
+            bar.style.width = bar.dataset.progress + "%";
           });
           skillObserver.disconnect();
         }
@@ -112,4 +103,3 @@ darkToggle.addEventListener("click", () => {
   }
 
 });
-
