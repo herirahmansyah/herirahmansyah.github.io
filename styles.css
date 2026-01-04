@@ -35,10 +35,6 @@ body.dark .hero {
   background: linear-gradient(135deg, #121212, #1f1f1f);
 }
 
-body.dark header {
-  background: #1e1e1e;
-}
-
 body.dark .section {
   background: #121212;
 }
@@ -83,7 +79,9 @@ body.dark nav ul li a:hover {
 body.dark nav ul {
     background: #111;
 }
-
+body.dark nav ul li a {
+  padding: 12px 0;
+}
 nav ul {
   list-style: none;
   display: flex;
@@ -116,8 +114,10 @@ nav ul li a {
   border-radius: 5px;
   text-decoration: none;
 }
+
 .skills-list {
-  max-width: 600px;
+  max-width: 700px;
+  margin: auto;
 }
 
 .skill {
@@ -139,10 +139,11 @@ nav ul li a {
 }
 
 .progress {
+  width: 0;
   height: 100%;
   background: linear-gradient(90deg, #4a90e2, #357abd);
   border-radius: 6px;
-  transition: width 1s ease;
+  transition: width 1.2s ease;
 }
 
 /* Section */
@@ -205,13 +206,7 @@ footer {
   text-align: center;
   padding: 1rem;
 }
-.progress {
-  width: 0;
-  height: 100%;
-  background: linear-gradient(90deg, #4a90e2, #357abd);
-  border-radius: 6px;
-  transition: width 1.2s ease;
-}
+
 .social-links i {
   font-size: 30px;
 }
@@ -312,5 +307,3 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
-
-
