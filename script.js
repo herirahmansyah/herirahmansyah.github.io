@@ -1,3 +1,8 @@
+// Default DARK MODE saat pertama kali buka
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("dark");
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
@@ -13,12 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      DARK MODE
   ========================= */
-  const darkToggle = document.getElementById("darkToggle");
-  if (darkToggle) {
-    darkToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-    });
+ document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    document.body.classList.remove("dark");
+  } else {
+    document.body.classList.add("dark"); // default
   }
+});
+
+const darkToggle = document.getElementById("darkToggle");
+
+darkToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
+
 
   /* =========================
      SCROLL ANIMATION
@@ -91,3 +112,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
