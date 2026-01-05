@@ -103,3 +103,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* =========================
+   LIVE PREVIEW POPUP
+========================= */
+const previewModal = document.getElementById("previewModal");
+const previewGif = document.getElementById("previewGif");
+const closePreview = document.querySelector(".preview-modal .close");
+
+document.querySelectorAll(".open-preview").forEach(btn => {
+  btn.addEventListener("click", () => {
+    previewModal.style.display = "flex";
+
+    // Lazy load GIF
+    if (!previewGif.src) {
+      previewGif.src = btn.dataset.gif;
+    }
+  });
+});
+
+// Close button
+closePreview.addEventListener("click", () => {
+  previewModal.style.display = "none";
+});
+
+// Click outside image
+previewModal.addEventListener("click", e => {
+  if (e.target === previewModal) {
+    previewModal.style.display = "none";
+  }
+});
+
+// ESC key close
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    previewModal.style.display = "none";
+  }
+});
+
