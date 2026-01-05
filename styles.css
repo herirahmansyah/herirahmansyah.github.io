@@ -61,6 +61,47 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
 }
+/* =========================
+   LIVE PREVIEW MODAL
+========================= */
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.preview-modal img {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  animation: zoomIn 0.35s ease;
+}
+
+.preview-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 34px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Zoom animation */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 /* =========================
    DARK MODE NAVIGATION
@@ -307,3 +348,4 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
+
