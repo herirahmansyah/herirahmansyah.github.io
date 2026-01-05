@@ -240,6 +240,29 @@ nav ul li a {
   height: 200px;
   object-fit: cover;
 }
+.project-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #4a90e2;
+  color: #4a90e2;
+}
+
+.btn-outline:hover {
+  background: #4a90e2;
+  color: #fff;
+}
+
+/* Dark mode */
+body.dark .btn-outline {
+  border-color: #6aaeff;
+  color: #6aaeff;
+}
 
 footer {
   background: #333;
@@ -348,4 +371,5 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
+
 
