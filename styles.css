@@ -366,26 +366,32 @@ body.dark .social-links a {
 .cert-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
+/* GAMBAR */
 .cert-modal img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
+/* ❌ TOMBOL CLOSE */
 .cert-modal .close {
   position: absolute;
   top: 20px;
   right: 30px;
-  font-size: 32px;
+
+  font-size: 36px;
+  font-weight: bold;
   color: #fff;
+
   cursor: pointer;
+  z-index: 10000; /* 🔥 INI PENTING */
 }
 
 
@@ -404,6 +410,7 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
+
 
 
 
