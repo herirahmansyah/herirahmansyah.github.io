@@ -59,22 +59,42 @@ document.addEventListener("DOMContentLoaded", () => {
     skillObserver.observe(skillSection);
   }
 
-  /* =========================
-     CERTIFICATE MODAL
-  ========================= */
-  const certModal = document.getElementById("certModal");
-  const certImage = document.getElementById("certImage");
+/* =========================
+   CERTIFICATE MODAL (FIXED)
+========================= */
+const certModal = document.getElementById("certModal");
+const certImg = document.getElementById("certImage");
+const certClose = document.querySelector("#certModal .close");
 
-  document.querySelectorAll(".open-cert").forEach(btn => {
-    btn.addEventListener("click", () => {
-      certModal.style.display = "flex";
-      certImage.src = btn.dataset.img;
-    });
+// Open modal
+document.querySelectorAll(".open-cert").forEach(btn => {
+  btn.addEventListener("click", () => {
+    certModal.style.display = "flex";
+    certImg.src = btn.dataset.img;
   });
+});
 
-  certModal?.addEventListener("click", e => {
-    if (e.target === certModal) certModal.style.display = "none";
-  });
+// Close via X
+certClose.addEventListener("click", () => {
+  certModal.style.display = "none";
+  certImg.src = "";
+});
+
+// Close klik background
+certModal.addEventListener("click", e => {
+  if (e.target === certModal) {
+    certModal.style.display = "none";
+    certImg.src = "";
+  }
+});
+
+// Close ESC
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    certModal.style.display = "none";
+    certImg.src = "";
+  }
+});
 
   /* =========================
      LIVE PREVIEW POPUP (GIF)
@@ -110,3 +130,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
