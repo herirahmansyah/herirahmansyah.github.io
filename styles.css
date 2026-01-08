@@ -393,6 +393,30 @@ body.dark .social-links a {
   cursor: pointer;
   z-index: 10000; /* 🔥 INI PENTING */
 }
+/* =========================
+   WHATSAPP ICON
+========================= */
+.social-links a.wa {
+  color: #25D366;
+}
+
+.social-links a.wa:hover {
+  color: #1ebe5d;
+  transform: translateY(-6px) scale(1.05);
+}
+
+/* Dark mode fix */
+body.dark .social-links a.wa {
+  color: #25D366;
+}
+
+/* Optional text */
+.contact-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.85;
+}
 
 
 /* Responsive */
@@ -410,6 +434,7 @@ body.dark .social-links a {
     flex-direction: column;
   }
 }
+
 
 
 
