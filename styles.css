@@ -329,37 +329,44 @@ body.dark .social-links i {
 }
 
 /* =========================
-   BRAND HOVER COLORS
+   SOCIAL ICON ANIMATION
 ========================= */
+.social-links a {
+  font-size: 28px;
+  color: #444;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
 
-/* Instagram */
-.social-links a.ig:hover {
+.social-links a:hover {
+  transform: translateY(-8px);
+}
+
+/* BRAND COLORS */
+.social-links a:hover .fa-whatsapp {
+  color: #25d366;
+}
+
+.social-links a:hover .fa-instagram {
   color: #e1306c;
-  transform: translateY(-6px);
 }
 
-/* Facebook */
-.social-links a.fb:hover {
+.social-links a:hover .fa-facebook {
   color: #1877f2;
-  transform: translateY(-6px);
 }
 
-/* LinkedIn */
-.social-links a.in:hover {
+.social-links a:hover .fa-linkedin {
   color: #0a66c2;
-  transform: translateY(-6px);
 }
 
-/* Email */
-.social-links a.mail:hover {
+.social-links a:hover .fa-envelope {
   color: #d44638;
-  transform: translateY(-6px);
 }
 
-/* Dark mode fix */
+/* DARK MODE */
 body.dark .social-links a {
   color: #f5f5f5;
 }
+
 /* =========================
    CERTIFICATE MODAL
 ========================= */
@@ -434,6 +441,7 @@ body.dark .social-links a.wa {
     flex-direction: column;
   }
 }
+
 
 
 
