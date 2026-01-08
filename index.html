@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Heri Rahmansyah | AI Engineer, Data Analyst & Web Developer</title>
-
-  <meta name="description"
-    content="Portofolio Heri Rahmansyah — AI Engineer, Data Analyst, dan Web Developer. Berpengalaman dalam Machine Learning, n8n Automation, Power BI, dan pengembangan web modern.">
-  <meta name="keywords"
-    content="Heri Rahmansyah, AI Engineer, Data Analyst, Web Developer, Machine Learning, Power BI, n8n, Portfolio">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Portofolio Heri Rahmansyah — AI Engineer, Data Analyst, dan Web Developer. Berpengalaman dalam Machine Learning, n8n Automation, Power BI, dan pengembangan web modern.">
+  <meta name="keywords" content="Heri Rahmansyah, AI Engineer, Data Analyst, Web Developer, Machine Learning, Power BI, n8n, Portfolio">
   <meta name="author" content="Heri Rahmansyah">
-
+  
   <!-- Open Graph -->
   <meta property="og:title" content="Heri Rahmansyah | AI Engineer & Data Analyst">
-  <meta property="og:description"
-    content="Portofolio profesional Heri Rahmansyah — AI Engineer, Data Analyst, dan Web Developer.">
+  <meta property="og:description" content="Portofolio profesional Heri Rahmansyah — AI Engineer, Data Analyst, dan Web Developer.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://herirahmansyah.github.io/">
   <meta property="og:image" content="https://herirahmansyah.github.io/preview.jpg">
-
-  <!-- Google Font -->
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-    rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
   <!-- Main CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
+  <!-- ==================== HEADER ==================== -->
   <header>
     <nav>
       <div class="logo">Heri Rahmansyah</div>
@@ -48,11 +41,12 @@
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
-        <button id="darkToggle" class="dark-toggle">🌙</button>
       </ul>
+      <button id="darkToggle" class="dark-toggle" aria-label="Toggle dark mode">🌙</button>
     </nav>
   </header>
 
+  <!-- ==================== HERO SECTION ==================== -->
   <section id="home" class="hero">
     <div class="hero-content">
       <h1>Halo, Saya Heri Rahmansyah</h1>
@@ -61,56 +55,68 @@
     </div>
   </section>
 
+  <!-- ==================== ABOUT SECTION ==================== -->
   <section id="about" class="section">
     <div class="container">
       <h2>About Me</h2>
       <div class="about-content">
-        <img src="photo.jpg" alt="Foto Anda" class="profile-img">
+        <img src="photo.jpg" alt="Foto Heri Rahmansyah" class="profile-img">
         <p>
-          Saya adalah seorang AI Engineer sekaligus Data Analyst dan Web Developer profesional
-          dengan pengalaman dalam mengembangkan model machine learning, menganalisis data kompleks
-          serta membuat dan memelihara situs web.
+          Saya adalah seorang AI Engineer sekaligus Data Analyst dan Web Developer profesional 
+          dengan pengalaman dalam mengembangkan model machine learning, menganalisis data kompleks 
+          serta membuat dan memelihara situs web. Fokus utama saya adalah menciptakan solusi AI 
+          yang scalable dan mengubah data mentah menjadi insight yang berharga untuk pengambilan 
+          keputusan bisnis. Keahlian saya mencakup pengembangan model machine learning dengan 
+          TensorFlow, data processing dengan n8n, serta data visualization dengan Power BI. 
+          Saya selalu mengikuti perkembangan teknologi AI terbaru untuk memberikan solusi terbaik 
+          bagi setiap proyek.
         </p>
       </div>
     </div>
   </section>
 
+  <!-- ==================== PORTFOLIO SECTION ==================== -->
   <section id="portfolio" class="section">
     <div class="container">
       <h2>Portfolio</h2>
-
       <div class="portfolio-grid">
-
+        
+        <!-- Project 1: Power BI -->
         <div class="project fade-up">
-          <img src="project1.jpg" alt="Proyek 1">
+          <img src="project1.jpg" alt="Power BI Dashboard Project">
           <h3>Mengubah Data Mentah Menjadi Insight Bisnis dengan Power BI</h3>
-          <p>Analisis data retail 4 tahun menggunakan Microsoft Power BI.</p>
-
+          <p>
+            Baru saja menyelesaikan proyek analisis data terbaru saya menggunakan Microsoft Power BI. 
+            Dalam proyek ini, saya menganalisis 4 tahun data penjualan retail (Superstore Dataset) 
+            untuk menjawab pertanyaan bisnis seputar tren penjualan dan performa wilayah.
+          </p>
           <div class="project-actions">
-            <button class="btn open-preview" data-gif="dashboard-demo.gif">
-              Live Preview
-            </button>
-            <a href="project1.html" class="btn">
-              Lihat Detail
-            </a>
+            <button class="btn open-preview" data-gif="dashboard-demo.gif">Live Preview</button>
+            <a href="project1.html" class="btn">Lihat Detail</a>
           </div>
         </div>
 
+        <!-- Project 2: n8n Automation -->
         <div class="project fade-up">
-          <img src="project2.jpg" alt="Proyek 2">
+          <img src="project2.jpg" alt="n8n Automation Project">
           <h3>Automasi Data Menggunakan n8n</h3>
-          <p>Sistem AI untuk menilai CV pelamar kerja secara otomatis.</p>
+          <p>
+            Proyek ini dibuat untuk membantu HR atau tim SDM rekrutmen untuk menilai CV pelamar 
+            secara cepat dan objektif dengan Bantuan AI. Adapun fungsinya Membuat sistem berbasis 
+            AI yang menganalisis CV pelamar kerja dan memberikan penilaian otomatis.
+          </p>
           <a href="project2.html" class="btn">Lihat Detail</a>
         </div>
 
+        <!-- Project 3: Coffee Shop Website -->
         <div class="project fade-up">
           <img src="project3.png" alt="CafeBangHeri Website">
           <h3>CafeBangHeri – Coffee Shop Website</h3>
-          <p>Website coffee shop modern dengan tampilan elegan.</p>
-          <a href="https://cafe-heris-buddy.lovable.app/"
-             class="btn"
-             target="_blank"
-             rel="noopener noreferrer">
+          <p>
+            Website coffee shop modern dengan tampilan elegan, fokus pada branding, user experience, 
+            dan visual storytelling. Cocok untuk bisnis F&B.
+          </p>
+          <a href="https://cafe-heris-buddy.lovable.app/" class="btn" target="_blank" rel="noopener noreferrer">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
           </a>
         </div>
@@ -119,39 +125,38 @@
     </div>
   </section>
 
+  <!-- ==================== CERTIFICATES SECTION ==================== -->
   <section id="certificates" class="section">
     <div class="container">
       <h2>Certificates</h2>
-
       <div class="portfolio-grid">
-
+        
+        <!-- Certificate 1: Google Data Analytics -->
         <div class="project fade-up">
           <img src="cert2.jpg" alt="Sertifikat Data Analyst">
           <h3>Data Analyst Certificate</h3>
           <p>Google Data Analytics – Coursera</p>
-          <button class="btn open-cert" data-img="cert2.jpg">
-            Lihat Sertifikat
-          </button>
+          <button class="btn open-cert" data-img="cert2.jpg">Lihat Sertifikat</button>
         </div>
 
+        <!-- Certificate 2: AI Engineer BNSP -->
         <div class="project fade-up">
           <img src="cert1.jpg" alt="Sertifikat AI Engineer">
           <h3>AI Engineer</h3>
           <p>Penerapan AI Untuk Proses Data – BNSP</p>
-          <button class="btn open-cert" data-img="cert1.jpg">
-            Lihat Sertifikat
-          </button>
+          <button class="btn open-cert" data-img="cert1.jpg">Lihat Sertifikat</button>
         </div>
 
       </div>
     </div>
   </section>
 
+  <!-- ==================== SKILLS SECTION ==================== -->
   <section id="skills" class="section">
     <div class="container">
       <h2>Skills</h2>
-
       <div class="skills-list">
+        
         <div class="skill">
           <span>AI Engineer</span>
           <div class="progress-bar">
@@ -193,45 +198,56 @@
             <div class="progress" data-progress="89"></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ==================== CONTACT SECTION ==================== -->
   <section id="contact" class="section">
     <div class="container contact">
       <h2>Contact</h2>
-
       <div class="social-links">
-        <a href="https://wa.me/6282125495080" target="_blank" aria-label="WhatsApp">
+        <a href="https://wa.me/6282125495080" target="_blank" class="wa" aria-label="WhatsApp">
           <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/herirahmansyah" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100082456091803" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/heri-rahmansyah-68b166380/" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
         </a>
         <a href="mailto:rahmansyahheri@gmail.com" aria-label="Email">
           <i class="fas fa-envelope"></i>
         </a>
       </div>
-
-      <p class="contact-text">
-        WhatsApp: <strong>+62 821-2549-5080</strong>
-      </p>
+      <p class="contact-text">WhatsApp: <strong>+62 821-2549-5080</strong></p>
     </div>
   </section>
 
+  <!-- ==================== FOOTER ==================== -->
   <footer>
     <p>&copy; 2025 Heri Rahmansyah. All rights reserved.</p>
   </footer>
 
-  <!-- CERTIFICATE MODAL (SATU SAJA) -->
+  <!-- ==================== MODALS ==================== -->
+  
+  <!-- Certificate Modal -->
   <div id="certModal" class="cert-modal">
     <span class="close">&times;</span>
-    <img id="certImage" alt="Certificate Preview">
+    <img id="certImage" src="" alt="Certificate Preview">
   </div>
 
-  <!-- LIVE PREVIEW MODAL -->
+  <!-- Live Preview Modal -->
   <div id="previewModal" class="preview-modal">
     <span class="close">&times;</span>
-    <img id="previewGif" alt="Live Preview GIF" loading="lazy">
+    <img id="previewGif" src="" alt="Live Preview GIF" loading="lazy">
   </div>
 
+  <!-- Main JavaScript -->
   <script src="script.js" defer></script>
 
 </body>
