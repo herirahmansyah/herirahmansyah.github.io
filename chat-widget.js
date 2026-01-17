@@ -224,11 +224,20 @@ Silakan tanya apa saja! 😊`;
             const response = await this.callWebhook(text);
             this.hideTypingIndicator();
 
-            if (response && response.response) {
+            // Handle different response formats from n8n
+            if (response && response.reply) {
+                // Format from Portfolio Chatbot workflow: { reply: "..." }
+                this.addMessage(response.reply, 'bot');
+            } else if (response && response.response) {
+                // Alternative format: { response: "..." }
                 this.addMessage(response.response, 'bot');
+            } else if (response && response.text) {
+                // Another format: { text: "..." }
+                this.addMessage(response.text, 'bot');
             } else if (response && typeof response === 'string') {
                 this.addMessage(response, 'bot');
             } else {
+                console.log('Unexpected response format:', response);
                 this.addMessage('Maaf, saya tidak bisa memproses permintaan Anda saat ini. Silakan coba lagi.', 'bot');
             }
         } catch (error) {
@@ -270,6 +279,6 @@ Silakan tanya apa saja! 😊`;
 // Initialize chat widget when DOM is ready
 document.addEventListener('DOMContentLoaded', function () {
     window.chatWidget = new ChatWidget({
-        webhookUrl: 'https://n8n-wphe5xf8q9we.ciluba.sumopod.my.id/webhook/da688b5c-9411-4ec6-b95e-7e4f0394b18f'
+        webhookUrl: 'https://n8n.bangheri.my.id/webhook/portfolio-chat'
     });
 });
