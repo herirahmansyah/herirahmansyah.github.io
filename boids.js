@@ -133,6 +133,18 @@
       if (this.y < M)     this.vy += 0.3;
       if (this.y > H - M) this.vy -= 0.3;
 
+      // Mouse attract
+      if (mouse) {
+        const mdx = mouse.x - this.x;
+        const mdy = mouse.y - this.y;
+        const md  = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (md < 150 && md > 0) {
+          const f = (1 - md / 150) * 0.08;
+          this.vx += mdx * f;
+          this.vy += mdy * f;
+        }
+      }
+
       // Speed clamp
       const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
       if (spd > SPEED_MAX) { this.vx = (this.vx / spd) * SPEED_MAX; this.vy = (this.vy / spd) * SPEED_MAX; }
@@ -256,7 +268,24 @@
 
   requestAnimationFrame(loop);
 
-  /* ── 8. Export helper — bisa dipakai dari luar jika perlu ── */
+  /* ── 8. Mouse attract — listen di document level ── */
+  let mouse = null;
+  document.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    const heroRect = hero.getBoundingClientRect();
+    if (
+      e.clientY >= heroRect.top &&
+      e.clientY <= heroRect.bottom &&
+      e.clientX >= heroRect.left &&
+      e.clientX <= heroRect.right
+    ) {
+      mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+    } else {
+      mouse = null;
+    }
+  });
+
+  /* ── 9. Export helper — bisa dipakai dari luar jika perlu ── */
   window.BoidsHero = {
     scatter() {
       boids.forEach(b => {
