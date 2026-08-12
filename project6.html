@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BangHeri AI Data Analyst — Project Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    h2 {
+      margin-top: 30px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eee;
+    }
+    ul {
+      line-height: 1.7;
+      padding-left: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f7f7f7;
+      font-weight: 600;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #fff;
+      background: #007bff;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .back:hover {
+      background: #0056b3;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .badge-pass {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .badge-arch {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>BangHeri AI Data Analyst — AI-Powered CSV Analysis with Secure BYOK Architecture</h1>
+
+  <div class="detail-img-placeholder" style="background: linear-gradient(135deg, #4a90e2, #357abd); margin-bottom: 20px;">
+    <span>BangHeri AI Data Analyst — Report View with Charts</span>
+  </div>
+
+  <p>
+    <strong>Upload CSV → ask questions → AI analyzes, charts, exports PDF — secure BYOK architecture.</strong><br><br>
+    BangHeri AI Data Analyst is a production-ready web application that lets business users and analysts upload CSV datasets, ask natural-language questions, and receive AI-generated analysis with charts and downloadable PDF reports — all without writing code.
+  </p>
+
+  <h2>Problem Solved</h2>
+  <p>
+    Data analysts and business users need quick, code-free insights from CSV data. Existing tools either require coding (Python/Pandas), leak API keys to servers, or lack exportable reports. BangHeri AI Data Analyst solves this with a <strong>zero-server-key</strong> architecture: users bring their own Gemini API key (held only in browser memory), upload CSVs inline (≤1 MB), and receive AI-generated analysis with charts and PDF reports — all running in a managed sandbox.
+  </p>
+
+  <h2>Tech Stack</h2>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Technology</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Frontend</td><td>React 19, Vite, TypeScript, Tailwind CSS v4, jsPDF</td></tr>
+      <tr><td>Backend</td><td>Express (tsx), SSE streaming, Google Interactions API proxy</td></tr>
+      <tr><td>AI Agent</td><td>Gemini <code>antigravity-preview-05-2026</code> + <code>code_execution</code> tool</td></tr>
+      <tr><td>Sandbox</td><td>Google-managed Linux (pandas, numpy, matplotlib pre-installed)</td></tr>
+      <tr><td>PDF Export</td><td>jsPDF 4.2.1 (deterministic A4, width-aware title ellipsis)</td></tr>
+      <tr><td>Automation Ready</td><td>n8n + GOWA webhook integration for WhatsApp bot</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Key Features</h2>
+  <ul>
+    <li><strong>BYOK (Bring Your Own Key):</strong> API key never touches server — sent per-request via <code>x-gemini-api-key</code> header, held only in browser memory.</li>
+    <li><strong>Inline CSV upload:</strong> ≤1 MB, no cloud storage dependency.</li>
+    <li><strong>Natural language analysis:</strong> Ask any business question; agent profiles, computes, visualizes.</li>
+    <li><strong>Chart generation:</strong> Matplotlib charts rendered in sandbox, extracted via tar snapshot, served statically.</li>
+    <li><strong>Deterministic PDF export:</strong> A4, width-aware KPI titles, no clipping/overlap, verified via controlled test harness (CP8.1–CP8.3).</li>
+    <li><strong>Follow-up conversations:</strong> Reuses warm sandbox (<code>environmentId</code>) for multi-turn analysis.</li>
+    <li><strong>Fail-closed design:</strong> Missing key → 400; no secret in env; quota bypass in dev.</li>
+  </ul>
+
+  <h2>Production Evidence</h2>
+  <table>
+    <thead>
+      <tr><th>Checkpoint</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Health check (<code>/api/health</code>)</td><td><span class="badge badge-pass">PASS</span> HTTP 200 <code>{"status":"ok"}</code></td></tr>
+      <tr><td>Upload endpoint (<code>/api/upload</code>)</td><td><span class="badge badge-pass">PASS</span> HTTP 200, file echoed, 1 MB cap</td></tr>
+      <tr><td>Analyze gate (missing key)</td><td><span class="badge badge-pass">PASS</span> HTTP 400 fail-closed, no provider call</td></tr>
+      <tr><td>Quota endpoint (<code>/api/quota</code>)</td><td><span class="badge badge-pass">PASS</span> HTTP 200 <code>{"used":0,"limit":999999}</code></td></tr>
+      <tr><td>Deploy commit</td><td><code>267c814b</code> — controlled push, manual Render deploy</td></tr>
+      <tr><td>Tag <code>v1.0.0</code></td><td>Immutable at <code>7ad11fd</code> (pre-patch baseline)</td></tr>
+      <tr><td>Production PDF smoke test</td><td><span class="badge badge-pass">PASS</span> Verified via production deployment</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Links</h2>
+  <ul>
+    <li><strong>Live Demo:</strong> <a href="https://bangheri-ai-data-analyst.onrender.com" target="_blank" rel="noopener noreferrer">https://bangheri-ai-data-analyst.onrender.com</a></li>
+    <li><strong>GitHub Repo:</strong> <a href="https://github.com/herirahmansyah/bangheri-ai-data-analyst" target="_blank" rel="noopener noreferrer">https://github.com/herirahmansyah/bangheri-ai-data-analyst</a></li>
+  </ul>
+
+  <a href="index.html" class="back">← Back to Home</a>
+  </div>
+
+</body>
+</html>
