@@ -61,6 +61,17 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
 }
+.project-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.project-actions .btn {
+  flex: 1;
+  min-width: 140px;
+}
 /* =========================
    LIVE PREVIEW MODAL
 ========================= */
