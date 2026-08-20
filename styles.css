@@ -451,9 +451,33 @@ body.dark .social-links a.wa {
   .about-content {
     flex-direction: column;
   }
+ }
+
+/* Certificate Verify Button */
+.btn-verify {
+  background: transparent;
+  border: 2px solid #4a90e2;
+  color: #4a90e2;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  min-width: auto;
+  margin-top: 10px;
 }
 
+.btn-verify:hover {
+  background: #4a90e2;
+  color: #fff;
+}
 
+body.dark .btn-verify {
+  border-color: #6aaeff;
+  color: #6aaeff;
+}
+
+body.dark .btn-verify:hover {
+  background: #6aaeff;
+  color: #121212;
+}
 
 
 
