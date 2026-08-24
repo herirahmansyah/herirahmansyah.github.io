@@ -88,6 +88,7 @@
       this.size  = 3 + Math.random() * 2.5;
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.trail = [];
+      this.label = LABELS[Math.floor(Math.random() * LABELS.length)];
     }
 
     update(all) {
@@ -204,6 +205,18 @@
       ctx.fill();
 
       ctx.restore();
+
+      /* Label ringan — Agent Network */
+      if (!reducedMotion) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.fillStyle = isDark() ? 'rgba(255,255,255,0.55)' : 'rgba(30,41,59,0.55)';
+        ctx.font = '9px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.label, 0, s * 2.4);
+        ctx.restore();
+      }
     }
   }
 
@@ -228,9 +241,52 @@
     }
   }
 
-  /* ── 6. Init boids ── */
-  const BOID_COUNT = 55;
+  /* ── 6. Init boids (Agent Network Field) ── */
+  const BOID_COUNT = (window.innerWidth < 768) ? 30 : 55;
   let boids = [];
+
+  // Label mapping per agent role
+  const LABELS = ['AI', 'Data', 'Auto'];
+
+  // Detect reduced motion (dinamis)
+  const reducedMotionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  let reducedMotion = reducedMotionQuery ? reducedMotionQuery.matches : false;
+
+  let animationFrameId = null;
+
+  function renderStaticFrame() {
+    const colors = getColors();
+    ctx.fillStyle = getBgColor();
+    ctx.fillRect(0, 0, W, H);
+    drawConnections(colors);
+    for (const b of boids) {
+      b.draw();
+    }
+  }
+
+  function startLoop() {
+    if (!reducedMotion && animationFrameId === null) {
+      function loop() {
+        const colors = getColors();
+        ctx.fillStyle = getBgColor();
+        ctx.fillRect(0, 0, W, H);
+        drawConnections(colors);
+        for (const b of boids) {
+          b.update(boids);
+          b.draw();
+        }
+        animationFrameId = requestAnimationFrame(loop);
+      }
+      animationFrameId = requestAnimationFrame(loop);
+    }
+  }
+
+  function stopLoop() {
+    if (animationFrameId !== null) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  }
 
   function initBoids() {
     const colors = getColors();
@@ -247,26 +303,29 @@
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   /* ── 7. Loop animasi ── */
-  function loop() {
-    const colors = getColors();
-
-    /* Trail fade — overlay semi-transparan setiap frame */
-    ctx.fillStyle = getBgColor();
-    ctx.fillRect(0, 0, W, H);
-
-    /* Koneksi dulu (di bawah ikan) */
-    drawConnections(colors);
-
-    /* Update + draw tiap boid */
-    for (const b of boids) {
-      b.update(boids);
-      b.draw();
-    }
-
-    requestAnimationFrame(loop);
+  startLoop();
+  if (reducedMotion) {
+    renderStaticFrame();
   }
 
-  requestAnimationFrame(loop);
+  // Listener dinamis untuk perubahan prefers-reduced-motion
+  if (reducedMotionQuery) {
+    const handleChange = () => {
+      reducedMotion = reducedMotionQuery.matches;
+      if (reducedMotion) {
+        stopLoop();
+        renderStaticFrame();
+      } else {
+        renderStaticFrame();
+        startLoop();
+      }
+    };
+    if (typeof reducedMotionQuery.addEventListener === 'function') {
+      reducedMotionQuery.addEventListener('change', handleChange);
+    } else if (typeof reducedMotionQuery.addListener === 'function') {
+      reducedMotionQuery.addListener(handleChange);
+    }
+  }
 
   /* ── 8. Mouse attract — listen di document level ── */
   let mouse = null;

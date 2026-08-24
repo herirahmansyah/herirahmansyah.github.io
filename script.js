@@ -28,6 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================
+     PREFERS-REDUCED-MOTION
+  ========================= */
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) {
+    document.body.classList.add('reduced-motion');
+  }
+
+  /* =========================
      SCROLL ANIMATION
   ========================= */
   const observer = new IntersectionObserver(entries => {
