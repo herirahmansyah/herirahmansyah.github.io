@@ -4,138 +4,137 @@ document.addEventListener("DOMContentLoaded", () => {
      DARK MODE (DEFAULT + SAVE)
   ========================= */
   const savedTheme = localStorage.getItem("theme");
-  document.body.classList.toggle("dark", savedTheme !== "light");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
+
+  document.body.classList.toggle("dark", isDark);
+  document.body.classList.toggle("light", !isDark);
 
   const darkToggle = document.getElementById("darkToggle");
   if (darkToggle) {
     darkToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark") ? "dark" : "light"
-      );
+      const nowDark = document.body.classList.toggle("dark");
+      document.body.classList.toggle("light", !nowDark);
+      localStorage.setItem("theme", nowDark ? "dark" : "light");
     });
   }
 
   /* =========================
-     MOBILE NAV
+     MOBILE NAV (hamburger for site-bar)
   ========================= */
-  const navToggle = document.querySelector("nav ul");
-  if (navToggle) {
-    navToggle.addEventListener("click", () => {
-      navToggle.classList.toggle("show");
+  const nav = document.querySelector(".site-bar nav");
+  const navList = nav?.querySelector("ul");
+  if (nav && navList) {
+    let hamburger = nav.querySelector(".hamburger");
+    if (!hamburger) {
+      hamburger = document.createElement("button");
+      hamburger.className = "hamburger";
+      hamburger.setAttribute("aria-label", "Toggle menu");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      nav.appendChild(hamburger);
+    }
+    hamburger.addEventListener("click", () => {
+      const open = navList.classList.toggle("show");
+      hamburger.setAttribute("aria-expanded", String(open));
+      hamburger.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
     });
+    // Close on link click
+    navList.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      navList.classList.remove("show");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }));
   }
 
   /* =========================
-     PREFERS-REDUCED-MOTION
+     SKILL PROGRESS BARS
+     Trigger when skills act enters viewport
   ========================= */
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducedMotion) {
-    document.body.classList.add('reduced-motion');
-  }
+  const skillsAct = document.querySelector("#skills");
+  const skillBars = document.querySelectorAll(".skill-card .progress");
 
-  /* =========================
-     SCROLL ANIMATION
-  ========================= */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll(".fade-up, .section").forEach(el => observer.observe(el));
-
-  /* =========================
-     SKILL PROGRESS BAR
-  ========================= */
-  const skillSection = document.querySelector("#skills");
-  const skillBars = document.querySelectorAll(".progress");
-
-  if (skillSection && skillBars.length) {
-    const skillObserver = new IntersectionObserver(entries => {
+  if (skillsAct && skillBars.length) {
+    const skillsObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         skillBars.forEach(bar => {
-          bar.style.width = bar.dataset.progress + "%";
+          const target = parseInt(bar.dataset.progress, 10) || 0;
+          bar.style.width = target + "%";
         });
-        skillObserver.disconnect();
+        skillsObserver.disconnect();
       }
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3, rootMargin: "0px 0px -10% 0px" });
 
-    skillObserver.observe(skillSection);
+    skillsObserver.observe(skillsAct);
   }
-
-/* =========================
-   CERTIFICATE MODAL (FIXED)
-========================= */
-const certModal = document.getElementById("certModal");
-const certImg = document.getElementById("certImage");
-const certClose = document.querySelector("#certModal .close");
-
-// Open modal
-document.querySelectorAll(".open-cert").forEach(btn => {
-  btn.addEventListener("click", () => {
-    certModal.style.display = "flex";
-    certImg.src = btn.dataset.img;
-  });
-});
-
-// Close via X
-certClose.addEventListener("click", () => {
-  certModal.style.display = "none";
-  certImg.src = "";
-});
-
-// Close klik background
-certModal.addEventListener("click", e => {
-  if (e.target === certModal) {
-    certModal.style.display = "none";
-    certImg.src = "";
-  }
-});
-
-// Close ESC
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    certModal.style.display = "none";
-    certImg.src = "";
-  }
-});
 
   /* =========================
-     LIVE PREVIEW POPUP (GIF)
+     CERTIFICATE MODAL
+  ========================= */
+  const certModal = document.getElementById("certModal");
+  const certImg = document.getElementById("certImage");
+  const certClose = document.querySelector("#certModal .close");
+
+  function openCertModal(src) {
+    certModal.style.display = "flex";
+    certImg.src = src;
+    certImg.alt = "Certificate Preview";
+    document.body.style.overflow = "hidden";
+  }
+  function closeCertModal() {
+    certModal.style.display = "none";
+    certImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".open-cert").forEach(btn => {
+    btn.addEventListener("click", () => openCertModal(btn.dataset.img));
+  });
+
+  certClose?.addEventListener("click", closeCertModal);
+  certModal?.addEventListener("click", e => { if (e.target === certModal) closeCertModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeCertModal(); });
+
+  /* =========================
+     LIVE PREVIEW MODAL (GIF)
   ========================= */
   const previewModal = document.getElementById("previewModal");
   const previewGif = document.getElementById("previewGif");
-  const closePreview = document.querySelector(".preview-modal .close");
+  const previewClose = document.querySelector(".preview-modal .close");
+
+  function openPreviewModal(src) {
+    previewModal.style.display = "flex";
+    previewGif.src = src;
+    previewGif.alt = "Live Preview";
+    document.body.style.overflow = "hidden";
+  }
+  function closePreviewModal() {
+    previewModal.style.display = "none";
+    previewGif.src = "";
+    document.body.style.overflow = "";
+  }
 
   document.querySelectorAll(".open-preview").forEach(btn => {
-    btn.addEventListener("click", () => {
-      previewModal.style.display = "flex";
-      previewGif.src = btn.dataset.gif; // lazy load
+    btn.addEventListener("click", () => openPreviewModal(btn.dataset.gif));
+  });
+
+  previewClose?.addEventListener("click", closePreviewModal);
+  previewModal?.addEventListener("click", e => { if (e.target === previewModal) closePreviewModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closePreviewModal(); });
+
+  /* =========================
+     SMOOTH SCROLL for anchor links (fallback)
+  ========================= */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     });
   });
 
-  closePreview?.addEventListener("click", () => {
-    previewModal.style.display = "none";
-    previewGif.src = "";
-  });
-
-  previewModal?.addEventListener("click", e => {
-    if (e.target === previewModal) {
-      previewModal.style.display = "none";
-      previewGif.src = "";
-    }
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") {
-      previewModal.style.display = "none";
-      previewGif.src = "";
-    }
-  });
-
 });
-
