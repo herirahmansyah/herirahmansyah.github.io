@@ -24,6 +24,24 @@ body.light {
   --sc-accent-ink:  #ffffff;
 }
 
+/* ---------- Hero copy plate ----------
+   Scrim lokal khusus di belakang blok teks hero. Sengaja SIBLING dari
+   .sc-copy--lead, bukan child: shoot.mjs menyembunyikan [data-sc-cue] beserta
+   seluruh turunannya sebelum memotret latar, jadi ::before pada blok copy akan
+   ikut hilang bersama teks yang mau dilindunginya dan angka kontras tidak akan
+   pernah berubah.
+   Dikunci ke --sc-canvas supaya ikut tema: plate putih di bawah tinta gelap
+   (light), plate hitam di bawah tinta terang (dark). Tidak menyentuh drift
+   ground maupun scrim act lain. */
+.sc-scrim--hero-plate {
+  background:
+    radial-gradient(150% 180% at 0% 100%,
+      var(--sc-canvas) 0%,
+      color-mix(in oklab, var(--sc-canvas) 90%, transparent) 55%,
+      color-mix(in oklab, var(--sc-canvas) 75%, transparent) 80%,
+      transparent 100%);
+}
+
 /* ---------- Site bar (fixed header) ---------- */
 .site-bar {
   position: fixed;
@@ -127,17 +145,21 @@ main { position: relative; z-index: 1; }
 }
 .about-text { display: flex; flex-direction: column; justify-content: center; gap: var(--sc-4); }
 
-/* ---------- Portfolio rail (pinned act 4) ---------- */
-.portfolio-stage { height: 100%; }
-.portfolio-rail {
-  display: flex;
+/* ---------- Portfolio grid (static act 4) ---------- */
+/* The intro copy is its own act right above this one, so the grid opens with no
+   top padding: the pair reads as one block instead of two sections. */
+.portfolio-section { padding-block-start: 0; }
+.portfolio-grid,
+.cert-grid {
+  display: grid;
+  /* min() on the track floor, not a bare rem: a 22rem floor is wider than a
+     350px phone column and would push the whole grid into horizontal overflow —
+     the exact scroll the rail was removed to get rid of. */
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   gap: var(--sc-5);
-  height: 100%;
   align-items: stretch;
-  padding-bottom: var(--sc-4);
 }
 .project-card {
-  flex: 0 0 clamp(28rem, 35vw, 34rem);
   display: flex;
   flex-direction: column;
   background: var(--sc-surface);
@@ -194,18 +216,9 @@ main { position: relative; z-index: 1; }
 .peak-list li { margin-bottom: var(--sc-2); }
 .peak-actions { display: flex; gap: var(--sc-3); flex-wrap: wrap; }
 
-/* ---------- Certificates rail (pinned act 6) ---------- */
-.cert-stage { height: 100%; }
-.cert-rail {
-  display: flex;
-  gap: var(--sc-5);
-  height: 100%;
-  align-items: stretch;
-  padding-bottom: var(--sc-4);
-}
-.cert-card__lead { flex: 0 0 clamp(22rem, 28vw, 26rem); display: flex; flex-direction: column; justify-content: center; gap: var(--sc-3); }
+/* ---------- Certificates grid (static act 6) ---------- */
+/* Container rule shared with .portfolio-grid above. */
 .cert-card {
-  flex: 0 0 clamp(24rem, 30vw, 28rem);
   display: flex;
   flex-direction: column;
   background: var(--sc-surface);
@@ -397,8 +410,6 @@ body.light .foot { color: var(--sc-ink-soft); }
 
 @media (max-width: 768px) {
   .site-bar nav ul { display: none; }
-  .portfolio-rail, .cert-rail { padding-bottom: var(--sc-6); }
-  .project-card, .cert-card { flex-basis: 85vw; }
   .peak-images { flex-direction: column; }
   .peak-img { width: 100%; }
   .skills-grid { grid-template-columns: 1fr; }

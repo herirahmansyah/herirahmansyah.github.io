@@ -40,10 +40,11 @@
 <main id="top">
 
   <!-- 1 · RECOGNITION: scrub hero -->
-  <section data-sc-act="scrub" data-sc-span="2.6" data-sc-dwell="0.34" data-sc-drift="#08090b">
+  <section data-sc-act="scrub" data-sc-span="2.0" data-sc-dwell="0.34" data-sc-drift="#08090b">
     <div data-sc-stage>
       <img class="sc-stage__poster" src="preview.jpg" alt="" decoding="async">
       <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="sc-scrim sc-scrim--hero-plate" aria-hidden="true"></div>
       <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.78 0">
         <h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">Heri Rahmansyah</h1>
         <p class="sc-body">AI Engineer · Data Analyst · Web Developer — AI + Data + Automation</p>
@@ -53,7 +54,7 @@
   </section>
 
   <!-- 2 · TENSION: pin about -->
-  <section id="about" data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#101217">
+  <section id="about" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#101217">
     <div data-sc-stage class="about-stage">
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
       <div class="about-grid">
@@ -80,103 +81,100 @@
     </div>
   </section>
 
-  <!-- 4 · SUBSTANCE: pin portfolio grid (featured projects) -->
-  <section data-sc-act="pin" data-sc-span="4.5" data-sc-drift="#0e0f13">
-    <div data-sc-stage class="portfolio-stage">
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
-      <div class="portfolio-rail" data-sc-pan="0.08">
-        <!-- Project 0: BangHeri AI Data Analyst (FEATURED) -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="bangheri-home.png" alt="BangHeri AI Data Analyst — Upload & Analyze Screen" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>BangHeri AI Data Analyst</h3>
-            <p>AI-powered data analyst web app: upload CSV, ask questions in natural language, get AI-generated insights, charts, and PDF reports — all with your own Gemini API key (BYOK).</p>
-            <div class="project-actions">
-              <a href="https://bangheri-ai-data-analyst.onrender.com" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-              <a href="https://github.com/herirahmansyah/bangheri-ai-data-analyst" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-              <a href="project6.html" class="btn">Details</a>
-            </div>
+  <!-- 4 · SUBSTANCE: static portfolio grid (featured projects) -->
+  <section class="sc-section portfolio-section" data-sc-act="flow" data-sc-drift="#0e0f13">
+    <div class="sc-wrap portfolio-grid" data-sc-in data-sc-stagger="70">
+      <!-- Project 0: BangHeri AI Data Analyst (FEATURED) -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="bangheri-home.png" alt="BangHeri AI Data Analyst — Upload & Analyze Screen" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>BangHeri AI Data Analyst</h3>
+          <p>AI-powered data analyst web app: upload CSV, ask questions in natural language, get AI-generated insights, charts, and PDF reports — all with your own Gemini API key (BYOK).</p>
+          <div class="project-actions">
+            <a href="https://bangheri-ai-data-analyst.onrender.com" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            <a href="https://github.com/herirahmansyah/bangheri-ai-data-analyst" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="project6.html" class="btn">Details</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Project 1: AI Interaction Evaluator Dashboard -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="project5.png" alt="AI Interaction Evaluator Dashboard" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>AI Interaction Evaluator Dashboard</h3>
-            <p>Streamlit dashboard that grades AI coding-assistant responses using LLM-as-a-Judge (via OpenRouter). Three dimensions — Engineering Judgment, Preamble Utility, Trustworthiness — with concrete evidence for each score.</p>
-            <div class="project-actions">
-              <a href="https://github.com/herirahmansyah/ai-interaction-evaluator-dashboard" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-            </div>
+      <!-- Project 1: AI Interaction Evaluator Dashboard -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="project5.png" alt="AI Interaction Evaluator Dashboard" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>AI Interaction Evaluator Dashboard</h3>
+          <p>Streamlit dashboard that grades AI coding-assistant responses using LLM-as-a-Judge (via OpenRouter). Three dimensions — Engineering Judgment, Preamble Utility, Trustworthiness — with concrete evidence for each score.</p>
+          <div class="project-actions">
+            <a href="https://github.com/herirahmansyah/ai-interaction-evaluator-dashboard" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Project 2: CLI AI Agent Evaluator -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="project4.png" alt="CLI AI Agent Evaluator" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>CLI-Based AI Agent Evaluator</h3>
-            <p>Terminal-based Human-in-the-Loop evaluation tool in Python. Simulates AI agent generating shell commands with RLHF-style safety checks before human evaluation.</p>
-            <div class="project-actions">
-              <a href="https://github.com/herirahmansyah/cli-agent-evaluator" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-            </div>
+      <!-- Project 2: CLI AI Agent Evaluator -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="project4.png" alt="CLI AI Agent Evaluator" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>CLI-Based AI Agent Evaluator</h3>
+          <p>Terminal-based Human-in-the-Loop evaluation tool in Python. Simulates AI agent generating shell commands with RLHF-style safety checks before human evaluation.</p>
+          <div class="project-actions">
+            <a href="https://github.com/herirahmansyah/cli-agent-evaluator" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Project 3: Power BI Dashboard -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="project1.jpg" alt="Power BI Dashboard Project" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>Power BI: Retail Sales Analytics</h3>
-            <p>Four years of retail sales data (Superstore dataset) analyzed for sales trends and regional performance. Decision-ready insights delivered via interactive dashboards.</p>
-            <div class="project-actions">
-              <button class="btn open-preview" data-gif="dashboard-demo.gif"><i class="fa-solid fa-play"></i> Live Preview</button>
-              <a href="project1.html" class="btn">Details</a>
-            </div>
+      <!-- Project 3: Power BI Dashboard -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="project1.jpg" alt="Power BI Dashboard Project" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>Power BI: Retail Sales Analytics</h3>
+          <p>Four years of retail sales data (Superstore dataset) analyzed for sales trends and regional performance. Decision-ready insights delivered via interactive dashboards.</p>
+          <div class="project-actions">
+            <button class="btn open-preview" data-gif="dashboard-demo.gif"><i class="fa-solid fa-play"></i> Live Preview</button>
+            <a href="project1.html" class="btn">Details</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Project 4: n8n Automation -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="Loker.webp" alt="n8n Automation Project" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>AI-Powered Recruitment Automation (n8n)</h3>
-            <p>Automation system for HR teams to screen job applicants quickly with AI. Analyzes candidate CVs and generates consistent assessments, dramatically reducing manual screening time.</p>
-            <div class="project-actions">
-              <a href="project2.html" class="btn">Details</a>
-            </div>
+      <!-- Project 4: n8n Automation -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="Loker.webp" alt="n8n Automation Project" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>AI-Powered Recruitment Automation (n8n)</h3>
+          <p>Automation system for HR teams to screen job applicants quickly with AI. Analyzes candidate CVs and generates consistent assessments, dramatically reducing manual screening time.</p>
+          <div class="project-actions">
+            <a href="project2.html" class="btn">Details</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Project 5: Coffee Shop Website -->
-        <article class="project-card" data-sc-tilt="6">
-          <figure>
-            <img src="project3.png" alt="CafeBangHeri Website" loading="lazy">
-          </figure>
-          <div class="project-card__content">
-            <h3>CafeBangHeri — Coffee Shop Website</h3>
-            <p>Modern coffee shop website with elegant design, focused on branding, user experience, and visual storytelling for F&B businesses.</p>
-            <div class="project-actions">
-              <a href="https://cafe-heris-buddy.lovable.app/" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-            </div>
+      <!-- Project 5: Coffee Shop Website -->
+      <article class="project-card" data-sc-tilt="6">
+        <figure>
+          <img src="project3.png" alt="CafeBangHeri Website" loading="lazy">
+        </figure>
+        <div class="project-card__content">
+          <h3>CafeBangHeri — Coffee Shop Website</h3>
+          <p>Modern coffee shop website with elegant design, focused on branding, user experience, and visual storytelling for F&B businesses.</p>
+          <div class="project-actions">
+            <a href="https://cafe-heris-buddy.lovable.app/" class="btn" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
   </section>
 
   <!-- 5 · PEAK: pin BangHeri showcase -->
-  <section id="peak" data-sc-act="pin" data-sc-span="3.2" data-sc-drift="#0a0b0d">
+  <section id="peak" data-sc-act="pin" data-sc-span="2.4" data-sc-drift="#0a0b0d">
     <div data-sc-stage class="peak-stage">
       <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
       <div class="peak-grid">
@@ -205,58 +203,54 @@
     </div>
   </section>
 
-  <!-- 6 · CERTIFICATES: pin -->
-  <section id="certificates" data-sc-act="pin" data-sc-span="3.8" data-sc-drift="#08090b">
-    <div data-sc-stage class="cert-stage">
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
-      <div class="cert-rail" data-sc-pan="0.06">
-        <div class="cert-card__lead sc-stack">
-          <p class="sc-label">Certificates</p>
-          <h2 class="sc-display sc-display--md">Verified Credentials</h2>
-          <p class="sc-body">Industry-recognized certifications in AI, Data Analytics, and Engineering.</p>
+  <!-- 6 · CERTIFICATES: static grid -->
+  <section id="certificates" class="sc-section" data-sc-act="flow" data-sc-drift="#08090b">
+    <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
+      <p class="sc-label">Certificates</p>
+      <h2 class="sc-display sc-display--md">Verified Credentials</h2>
+      <p class="sc-body">Industry-recognized certifications in AI, Data Analytics, and Engineering.</p>
+    </div>
+    <div class="sc-wrap cert-grid" data-sc-in data-sc-stagger="60">
+      <article class="cert-card" data-sc-tilt="5">
+        <figure>
+          <img src="cert3.jpg" alt="Google AI Professional Certificate" loading="lazy">
+        </figure>
+        <div class="cert-card__content">
+          <h3>AI Professional Certificate</h3>
+          <p>Google AI Professional – Coursera</p>
+          <div class="cert-actions">
+            <button class="btn open-cert" data-img="cert3.jpg">View Certificate</button>
+            <a href="https://www.coursera.org/account/accomplishments/specialization/206DYSPCGZ4X" class="btn btn-verify" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Verify</a>
+          </div>
         </div>
+      </article>
 
-        <article class="cert-card" data-sc-tilt="5">
-          <figure>
-            <img src="cert3.jpg" alt="Google AI Professional Certificate" loading="lazy">
-          </figure>
-          <div class="cert-card__content">
-            <h3>AI Professional Certificate</h3>
-            <p>Google AI Professional – Coursera</p>
-            <div class="cert-actions">
-              <button class="btn open-cert" data-img="cert3.jpg">View Certificate</button>
-              <a href="https://www.coursera.org/account/accomplishments/specialization/206DYSPCGZ4X" class="btn btn-verify" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Verify</a>
-            </div>
+      <article class="cert-card" data-sc-tilt="5">
+        <figure>
+          <img src="cert2.jpg" alt="Google Data Analytics Certificate" loading="lazy">
+        </figure>
+        <div class="cert-card__content">
+          <h3>Data Analyst Certificate</h3>
+          <p>Google Data Analytics – Coursera</p>
+          <div class="cert-actions">
+            <button class="btn open-cert" data-img="cert2.jpg">View Certificate</button>
+            <a href="https://www.coursera.org/account/accomplishments/professional-cert/SH40BMD31ECC" class="btn btn-verify" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Verify</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="cert-card" data-sc-tilt="5">
-          <figure>
-            <img src="cert2.jpg" alt="Google Data Analytics Certificate" loading="lazy">
-          </figure>
-          <div class="cert-card__content">
-            <h3>Data Analyst Certificate</h3>
-            <p>Google Data Analytics – Coursera</p>
-            <div class="cert-actions">
-              <button class="btn open-cert" data-img="cert2.jpg">View Certificate</button>
-              <a href="https://www.coursera.org/account/accomplishments/professional-cert/SH40BMD31ECC" class="btn btn-verify" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Verify</a>
-            </div>
+      <article class="cert-card" data-sc-tilt="5">
+        <figure>
+          <img src="cert1.jpg" alt="AI Engineer BNSP Certificate" loading="lazy">
+        </figure>
+        <div class="cert-card__content">
+          <h3>AI Engineer</h3>
+          <p>Applied AI for Data Processing – BNSP</p>
+          <div class="cert-actions">
+            <button class="btn open-cert" data-img="cert1.jpg">View Certificate</button>
           </div>
-        </article>
-
-        <article class="cert-card" data-sc-tilt="5">
-          <figure>
-            <img src="cert1.jpg" alt="AI Engineer BNSP Certificate" loading="lazy">
-          </figure>
-          <div class="cert-card__content">
-            <h3>AI Engineer</h3>
-            <p>Applied AI for Data Processing – BNSP</p>
-            <div class="cert-actions">
-              <button class="btn open-cert" data-img="cert1.jpg">View Certificate</button>
-            </div>
-          </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -299,7 +293,7 @@
   </section>
 
   <!-- 8 · COMMITMENT: pin close + pointer -->
-  <section id="contact" data-sc-act="pin" data-sc-span="1.15" data-sc-drift="#08090b">
+  <section id="contact" data-sc-act="pin" data-sc-span="1.3" data-sc-drift="#08090b">
     <div data-sc-stage class="close-stage" data-sc-spotlight>
       <div class="close-inner">
         <h2 class="sc-display sc-display--lg" data-sc-cue="0.06" data-sc-kinetic="lines">Let's build something</h2>
@@ -333,7 +327,8 @@
 
 <script src="scrollcraft.js"></script>
 <script src="script.js" defer></script>
-<script>ScrollCraft.mount(document.body);</script>
+<script defer>ScrollCraft.mount(document.body);</script>
 <script src="boids.js"></script>
+<script src="modal-accessibility-fix.js" defer></script>
 </body>
 </html>

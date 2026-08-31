@@ -263,8 +263,11 @@ video[data-sc-scrub] { opacity: 0; transition: opacity 380ms var(--sc-ease-out);
 .sc-copy--trail  { inset-inline: auto; right: var(--sc-gutter); bottom: clamp(3rem, 12vh, 9rem); text-align: right; }
 
 /* cue defaults: the engine writes opacity/transform inline, these are the
-   pre-paint state so nothing flashes before the first read() */
-[data-sc-cue] { opacity: 0; will-change: opacity, transform; }
+   pre-paint state so nothing flashes before the first read(). Gated behind
+   html.sc-active: the class is only added after ScrollCraft.mount() has wired
+   its observers and listeners, so with JS blocked or a failed mount the cues
+   stay fully visible instead of rendering as blank sections. */
+html.sc-active [data-sc-cue] { opacity: 0; will-change: opacity, transform; }
 .sc-ready [data-sc-cue] { transition: none; }
 
 /* kinetic split */
@@ -282,8 +285,9 @@ video[data-sc-scrub] { opacity: 0; transition: opacity 380ms var(--sc-ease-out);
 [data-sc-reveal] { will-change: clip-path; }
 [data-sc-parallax] { will-change: transform; }
 
-/* flow reveal (fires once) */
-[data-sc-in], [data-sc-stagger] > * {
+/* flow reveal (fires once). Hidden-state gated behind html.sc-active for the
+   same reason as the cues: no engine, no hidden content. */
+html.sc-active [data-sc-in], html.sc-active [data-sc-stagger] > * {
   opacity: 0;
   transform: translate3d(0, 14px, 0);
   transition: opacity 620ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
@@ -414,7 +418,7 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 }
 
 /* --------------------------------------------------------------- mobile -- */
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .sc-copy { inset-inline: var(--sc-gutter); max-width: none; }
   .sc-copy--trail { text-align: left; }
   .sc-stage { height: 100svh; }
