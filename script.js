@@ -38,15 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      SCROLL ANIMATION
   ========================= */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  }, { threshold: 0.15 });
+  if (typeof IntersectionObserver !== "undefined") {
+    document.documentElement.classList.add("reveal-active");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.15 });
 
-  document.querySelectorAll(".fade-up, .section").forEach(el => observer.observe(el));
+    document.querySelectorAll(".fade-up, .section").forEach(el => observer.observe(el));
+  }
 
   /* =========================
      SKILL PROGRESS BAR
