@@ -1,0 +1,38 @@
+/* scrollcraft.css — ScrollCraft foundation (no-op).
+ *
+ * Progressive-enhancement contract (learned from the production sc-active fix):
+ *
+ *   html.sc-active  — added ONLY at the end of ScrollCraft.mount(), after every
+ *                     observer and listener is wired. Any [data-sc-*] reveal
+ *                     that depends on JS is hidden by these rules.
+ *   html.sc-ready   — added at the same moment; disables transitions on cues
+ *                     until the first read() so nothing flashes before paint.
+ *
+ * Without html.sc-active (JS blocked, script failed, or a mid-mount throw) every
+ * rule below stays inert and the page renders fully visible — the 183ac05
+ * hotfix behaviour.
+ *
+ * Nothing on this page carries a data-sc-* attribute yet, so none of these
+ * selectors match. The foundation is a no-op by construction.
+ */
+
+/* cue defaults: engine writes opacity/transform inline. */
+html.sc-active [data-sc-cue] { opacity: 0; will-change: opacity, transform; }
+html.sc-ready [data-sc-cue] { transition: none; }
+
+/* flow reveal (fires once via IntersectionObserver).
+ *
+ * Specificity is deliberate: the show rule is written with the same html.sc-active
+ * ancestor as the hide rule so it always WINS (0,3,1) > (0,2,1). The earlier
+ * version wrote the show rule without the ancestor (0,2,0), so html.sc-active
+ * [data-sc-in] (0,2,1) permanently overrode .sc-in and the Skills section stayed
+ * invisible. Keep these two rules in lockstep. */
+html.sc-active [data-sc-in], html.sc-active [data-sc-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 620ms var(--sc-ease-out, ease-out), transform 620ms var(--sc-ease-out, ease-out);
+}
+html.sc-active [data-sc-in].sc-in, html.sc-active [data-sc-stagger] > .sc-in {
+  opacity: 1;
+  transform: none;
+}

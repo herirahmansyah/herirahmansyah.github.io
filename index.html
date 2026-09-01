@@ -31,6 +31,9 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- ScrollCraft foundation (no-op: progressive-enhancement, inactive until data-sc-* attributes are added) -->
+  <link rel="stylesheet" href="scrollcraft.css">
 </head>
 
 <body>
@@ -359,6 +362,11 @@
   <script src="script.js" defer></script>
 
   <script src="boids.js"></script>
+
+  <!-- ScrollCraft foundation: progressive-enhancement mount. Adds html.sc-active
+       only at the end of mount(), after observers/listeners are wired. -->
+  <script src="scrollcraft.js"></script>
+  <script>ScrollCraft.mount(document.body);</script>
 
 </body>
 
