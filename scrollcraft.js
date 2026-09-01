@@ -165,7 +165,13 @@
     addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(function () { read(); ticking = false; }); }
     }, { passive: true });
-    addEventListener('resize', function () { layout(); }, { passive: true });
+    addEventListener('resize', function () { layout(); read(); }, { passive: true });
+    // Re-anchor when late-loading assets (fonts/images) shift layout: a.top is
+    // measured at mount and would otherwise be stale by the height of the shift.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { layout(); read(); });
+    }
+    addEventListener('load', function () { layout(); read(); }, { passive: true });
 
     layout();
     // Apply the initial state immediately: layout() only measures geometry, so
