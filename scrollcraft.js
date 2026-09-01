@@ -29,11 +29,16 @@
     if (!root) root = document.body;
     reduce = global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Collect acts (sections with data-sc-act). None exist yet — no-op.
+    // Collect acts (sections with data-sc-act).
     var acts = [];
     Array.prototype.forEach.call(root.querySelectorAll('[data-sc-act]'), function (el) {
-      var act = { el: el, top: 0, height: 0, raw: 0, p: 0, live: false, parked: false,
-        pinned: false, cues: [], reveals: [] };
+      var actName = (el.getAttribute('data-sc-act') || '').trim();
+      var sp = parseFloat(el.getAttribute('data-sc-span'));
+      var act = { el: el, span: isNaN(sp) ? null : sp,
+        top: 0, height: 0, raw: 0, p: 0, live: false, parked: false,
+        // scrub and pin both play their animation across the act's own scroll
+        // travel (height - vh), so both use the same raw mapping.
+        pinned: actName === 'pin' || actName === 'scrub', cues: [], reveals: [] };
       acts.push(act);
     });
 
@@ -93,6 +98,10 @@
     function layout() {
       vh = innerHeight; vw = innerWidth;
       acts.forEach(function (a) {
+        // An act with data-sc-span reserves that many viewports of scroll for
+        // its animation. The stage (sticky, 100svh) stays pinned while the act
+        // scrolls through the extra height.
+        if (a.span !== null) a.el.style.height = (a.span * 100) + 'vh';
         var r = a.el.getBoundingClientRect();
         a.top = r.top + scrollY;
         a.height = r.height;
@@ -159,6 +168,10 @@
     addEventListener('resize', function () { layout(); }, { passive: true });
 
     layout();
+    // Apply the initial state immediately: layout() only measures geometry, so
+    // an act's cues sit at their CSS default (opacity 0 behind html.sc-active)
+    // until the first scroll. read() right here paints the real first frame.
+    read();
     // Only now, at the end of mount(), arm the hidden state.
     docEl.classList.add('sc-active');
     docEl.classList.add('sc-ready');

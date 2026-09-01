@@ -36,3 +36,15 @@ html.sc-active [data-sc-in].sc-in, html.sc-active [data-sc-stagger] > .sc-in {
   opacity: 1;
   transform: none;
 }
+
+/* scrub stage: when the section height is inflated by data-sc-span, the stage
+   (marked with data-sc-stage) is a 100svh sticky container that stays pinned
+   while the section scrolls through its extra height. The section's own
+   flex/grid centering is neutralised so the stage sits at the top of the
+   viewport, not at the vertical centre of the inflated height. */
+html.sc-active [data-sc-act="scrub"] { position: relative; }
+html.sc-active [data-sc-act="scrub"].hero { display: block; }
+html.sc-active [data-sc-act="scrub"] > [data-sc-stage] {
+  position: sticky; top: 0; height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+}
