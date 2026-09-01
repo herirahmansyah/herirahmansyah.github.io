@@ -90,7 +90,7 @@ nav {
   max-height: 85vh;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-  animation: zoomIn 0.35s ease;
+  animation: zoomIn var(--sc-d-modal, 380ms) ease;
 }
 
 .preview-modal .close {
@@ -192,9 +192,9 @@ nav ul li a {
   color: #fff;
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+    transform var(--sc-d-hover, 180ms) ease,
+    box-shadow var(--sc-d-hover, 180ms) ease,
+    background var(--sc-d-hover, 180ms) ease;
 }
 
 /* HOVER ANIMATION (SAMA SEMUA) */
@@ -238,7 +238,7 @@ nav ul li a {
   height: 100%;
   background: linear-gradient(90deg, #4a90e2, #357abd);
   border-radius: 6px;
-  transition: width 1.2s ease;
+  transition: width var(--sc-d-skill, 1.2s) ease;
 }
 
 /* Section — hidden only when JS reveal is armed (.reveal-active) */
