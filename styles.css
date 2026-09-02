@@ -160,7 +160,8 @@ nav ul li a {
 }
 
 .hero-content p {
-  color: #2d2d2d;
+  color: #1a1a1a;
+  font-weight: 400;
 }
 
 .hero-content .btn {
