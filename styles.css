@@ -156,16 +156,16 @@ nav ul li a {
 
 .hero-content h1 {
   font-size: 3rem;
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 .hero-content p {
-  color: #2d2d2d !important;
+  color: #2d2d2d;
 }
 
 .hero-content .btn {
-  color: #fff !important;
-  background: #4a90e2 !important;
+  color: #fff;
+  background: #4a90e2;
 }
 
 /* =========================
