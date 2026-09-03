@@ -460,6 +460,140 @@ body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
 .peak-info ul { line-height: 1.7; padding-left: 20px; }
 .peak-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
 
+/* =========================
+   STATS SECTION (Phase 1.1)
+   ========================= */
+.stats-section {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+body.dark .stats-section {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stat-item {
+  padding: 1.5rem 1rem;
+}
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #4a90e2;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.5rem;
+}
+body.dark .stat-number {
+  color: #6aaeff;
+}
+.stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  font-weight: 500;
+}
+body.dark .stat-label {
+  color: #94a3b8;
+}
+@media (max-width: 768px) {
+  .stat-number { font-size: 2.5rem; }
+  .stats-grid { gap: 1rem; }
+}
+
+/* =========================
+   MOBILE HAMBURGER MENU (Phase 1.2)
+   ========================= */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: inline-flex; }
+  nav ul {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 220px;
+    height: calc(100vh - 70px);
+    background: #fff;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.08);
+    transform: translateX(100%);
+    transition: transform 240ms ease;
+    z-index: 99;
+  }
+  body.dark nav ul {
+    background: #1a1a1a;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.4);
+  }
+  nav ul.open {
+    transform: translateX(0);
+  }
+  nav ul li a {
+    display: block;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+/* =========================
+   PARALLAX ORBS (Phase 1.3)
+   ========================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.hero::before {
+  width: 320px;
+  height: 320px;
+  background: rgba(74, 144, 226, 0.18);
+  top: -80px;
+  right: -60px;
+}
+.hero::after {
+  width: 240px;
+  height: 240px;
+  background: rgba(155, 89, 182, 0.15);
+  bottom: -60px;
+  left: -40px;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .hero::after { transform: none !important; }
+}
+
+/* =========================
+   HAMBURGER TOGGLE
+   ========================= */
+body.menu-open {
+  overflow: hidden;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .section, .fade-up, .progress { transition: none !important; opacity: 1 !important; transform: none !important; }
@@ -468,15 +602,6 @@ body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
 
 /* Responsive */
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    display: none;
-  }
-
-  nav ul.show {
-    display: flex;
-  }
-
   .about-content {
     flex-direction: column;
   }
