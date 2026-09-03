@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
-     DARK MODE (DEFAULT + SAVE)
+     DARK MODE (DEFAULT: Lab dark, user can toggle)
   ========================= */
   const savedTheme = localStorage.getItem("theme");
   document.body.classList.toggle("dark", savedTheme !== "light");
