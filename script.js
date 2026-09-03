@@ -18,14 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================
-     MOBILE NAV
+     MOBILE NAV (Phase 1.2: handled by phase1.js)
   ========================= */
-  const navToggle = document.querySelector("nav ul");
-  if (navToggle) {
-    navToggle.addEventListener("click", () => {
-      navToggle.classList.toggle("show");
-    });
-  }
+  // Mobile nav delegated to phase1.js (single source of truth).
 
   /* =========================
      PREFERS-REDUCED-MOTION
