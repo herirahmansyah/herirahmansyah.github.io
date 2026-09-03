@@ -730,9 +730,14 @@
                             <span class="tech-tag">Power BI</span>
                             <span class="tech-tag">Data Analysis</span>
                         </div>
-                        <a href="project1.html" class="text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors">
-                            <i data-lucide="eye" class="w-4 h-4"></i> View Details
-                        </a>
+                        <div class="flex flex-wrap gap-4">
+                            <button type="button" class="open-preview text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors" data-gif="dashboard-demo.gif">
+                                <i data-lucide="play" class="w-4 h-4"></i> Live Preview
+                            </button>
+                            <a href="project1.html" class="text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors">
+                                <i data-lucide="eye" class="w-4 h-4"></i> View Details
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -1154,6 +1159,12 @@
         <img id="certImage" src="" alt="Certificate Preview">
     </div>
 
+    <!-- Live Preview Modal (GIF) -->
+    <div id="previewModal" class="cert-modal">
+        <span class="close">&times;</span>
+        <img id="previewGif" src="" alt="Live Preview GIF" loading="lazy">
+    </div>
+
     <!-- JavaScript -->
     <script>
         // Initialize Lucide Icons + ScrollCraft-style reveal animations
@@ -1173,6 +1184,7 @@
             initNavActive();
             initNavbarScroll();
             initCertModal();
+            initPreviewModal();
         });
 
         // Certificate Modal
@@ -1196,6 +1208,34 @@
             certModal.querySelector(".close").addEventListener("click", close);
             certModal.addEventListener("click", e => { if (e.target === certModal) close(); });
             document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+        }
+
+        // Live Preview Modal (GIF)
+        function initPreviewModal() {
+            const previewModal = document.getElementById("previewModal");
+            const previewGif = document.getElementById("previewGif");
+            if (!previewModal || !previewGif) return;
+
+            document.querySelectorAll(".open-preview").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    previewGif.src = btn.dataset.gif;
+                    previewModal.classList.add("open");
+                });
+            });
+
+            const close = () => {
+                previewModal.classList.remove("open");
+                previewGif.src = "";
+            };
+
+            previewModal.querySelector(".close").addEventListener("click", close);
+            previewModal.addEventListener("click", e => { if (e.target === previewModal) close(); });
+            document.addEventListener("keydown", e => {
+                if (e.key === "Escape") {
+                    previewModal.classList.remove("open");
+                    previewGif.src = "";
+                }
+            });
         }
 
         // Mobile Menu
