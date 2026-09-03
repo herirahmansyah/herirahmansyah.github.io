@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
-     DARK MODE (DEFAULT + SAVE)
+     DARK MODE (DEFAULT: Lab dark, user can toggle)
   ========================= */
   const savedTheme = localStorage.getItem("theme");
   document.body.classList.toggle("dark", savedTheme !== "light");
@@ -18,14 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================
-     MOBILE NAV
+     MOBILE NAV (Phase 1.2: handled by phase1.js)
   ========================= */
-  const navToggle = document.querySelector("nav ul");
-  if (navToggle) {
-    navToggle.addEventListener("click", () => {
-      navToggle.classList.toggle("show");
-    });
-  }
+  // Mobile nav delegated to phase1.js (single source of truth).
 
   /* =========================
      PREFERS-REDUCED-MOTION

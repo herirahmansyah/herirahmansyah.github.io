@@ -1,3 +1,32 @@
+/* =========================
+   DESIGN TOKENS (Lab style)
+   ========================= */
+:root {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1A1A1A;
+  --bg-surface: #161616;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-elevated: rgba(255, 255, 255, 0.12);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-muted: #666666;
+
+  --accent-cyan: #00E5FF;
+  --accent-cyan-dim: #00B8D4;
+  --accent-purple: #7B2FF7;
+
+  --gradient-accent: linear-gradient(135deg, #00E5FF, #7B2FF7);
+  --gradient-button: linear-gradient(135deg, #00E5FF, #00B8D4);
+  --gradient-skill: linear-gradient(90deg, #00E5FF, #7B2FF7);
+
+  --sc-d-cue: 620ms;
+  --sc-d-skill: 1.2s;
+  --sc-d-modal: 380ms;
+  --sc-d-hover: 180ms;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +36,8 @@
 
 body {
   line-height: 1.6;
-  color: #333;
-  background: #f4f4f4;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
 }
 .dark-toggle {
   background: none;
@@ -18,41 +47,46 @@ body {
 }
 
 body.dark {
-  background: #121212;
-  color: #eaeaea;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
 }
 
 body.dark .hero-content h1,
 body.dark .hero-content p {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 body.dark .hero-content span {
-  color: #4a90e2;
+  color: var(--accent-cyan);
 }
 
 body.dark .hero {
-  background: linear-gradient(135deg, #121212, #1f1f1f);
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-tertiary));
 }
 
 body.dark .section {
-  background: #121212;
+  background: var(--bg-primary);
 }
 
 body.dark .project {
-  background: #1f1f1f;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 body.dark .progress-bar {
-  background: #333;
+  background: var(--bg-tertiary);
 }
 
 header {
   position: fixed;
   width: 100%;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
   z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 nav {
@@ -116,20 +150,20 @@ nav {
 
 /* =========================
    DARK MODE NAVIGATION
-========================= */
+   ========================= */
 body.dark header {
-    background: #111;
+    background: rgba(17, 17, 17, 0.85);
 }
 
 body.dark nav ul li a {
-    color: #f5f5f5;
+    color: var(--text-secondary);
 }
 
 body.dark nav ul li a:hover {
-    color: #4a90e2;
+    color: var(--accent-cyan);
 }
 body.dark nav ul {
-    background: #111;
+    background: var(--bg-secondary);
 }
 body.dark nav ul li a {
   padding: 12px 0;
@@ -142,7 +176,8 @@ nav ul {
 nav ul li a {
   margin: 0 1rem;
   text-decoration: none;
-  color: #333;
+  color: var(--text-secondary);
+  transition: color var(--sc-d-hover, 180ms) ease;
 }
 
 .hero {
@@ -151,27 +186,28 @@ nav ul li a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-tertiary));
 }
 
 .hero-content h1 {
   font-size: 3rem;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .hero-content p {
-  color: #1a1a1a;
+  color: var(--text-secondary);
   font-weight: 400;
 }
 
 .hero-content .btn {
-  color: #fff;
-  background: #4a90e2;
+  color: var(--bg-primary);
+  background: var(--gradient-button);
+  font-weight: 600;
 }
 
 /* =========================
    UNIVERSAL BUTTON STYLE
-========================= */
+   ========================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -181,7 +217,7 @@ nav ul li a {
   padding: 12px 20px;
 
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.3px;
 
   text-decoration: none;
@@ -189,8 +225,8 @@ nav ul li a {
   border: none;
   cursor: pointer;
 
-  background: linear-gradient(135deg, #4a90e2, #357abd);
-  color: #fff;
+  background: var(--gradient-button);
+  color: var(--bg-primary);
 
   transition:
     transform var(--sc-d-hover, 180ms) ease,
@@ -201,13 +237,13 @@ nav ul li a {
 /* HOVER ANIMATION (SAMA SEMUA) */
 .btn:hover {
   transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 25px rgba(74,144,226,0.35);
+  box-shadow: 0 12px 25px rgba(0, 229, 255, 0.35);
 }
 
 /* ACTIVE (KLIK) */
 .btn:active {
   transform: translateY(-1px) scale(0.98);
-  box-shadow: 0 6px 12px rgba(74,144,226,0.25);
+  box-shadow: 0 6px 12px rgba(0, 229, 255, 0.25);
 }
 
 
@@ -229,7 +265,7 @@ nav ul li a {
 .progress-bar {
   width: 100%;
   height: 12px;
-  background: #ddd;
+  background: var(--bg-tertiary);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -237,7 +273,7 @@ nav ul li a {
 .progress {
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, #4a90e2, #357abd);
+  background: var(--gradient-skill);
   border-radius: 6px;
   transition: width var(--sc-d-skill, 1.2s) ease;
 }
@@ -307,33 +343,34 @@ nav ul li a {
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #4a90e2;
-  color: #4a90e2;
+  border: 2px solid var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 .btn-outline:hover {
-  background: #4a90e2;
-  color: #fff;
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
 }
 
 /* Dark mode */
 body.dark .btn-outline {
-  border-color: #6aaeff;
-  color: #6aaeff;
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 footer {
-  background: #333;
-  color: #fff;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   text-align: center;
   padding: 1rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .social-links i {
   font-size: 30px;
 }
 body.dark .social-links i {
-  color: #f5f5f5;
+  color: var(--text-secondary);
 }
 .social-links {
   display: flex;
@@ -343,9 +380,9 @@ body.dark .social-links i {
 
 /* =========================
    SOCIAL ICON BASE
-========================= */
+   ========================= */
 .social-links a {
-  color: #444;
+  color: var(--text-secondary);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -355,10 +392,10 @@ body.dark .social-links i {
 
 /* =========================
    SOCIAL ICON ANIMATION
-========================= */
+   ========================= */
 .social-links a {
   font-size: 28px;
-  color: #444;
+  color: var(--text-secondary);
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -389,7 +426,7 @@ body.dark .social-links i {
 
 /* DARK MODE */
 body.dark .social-links a {
-  color: #f5f5f5;
+  color: var(--text-secondary);
 }
 
 /* =========================
@@ -452,13 +489,169 @@ body.dark .social-links a.wa {
 
 
 /* Peak Section — BangHeri Showcase */
-.peak-section { background: linear-gradient(135deg, #f0f6ff, #e8f0fe); }
-body.dark .peak-section { background: linear-gradient(135deg, #0f172a, #121212); }
+.peak-section { background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); }
+body.dark .peak-section { background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); }
 .peak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-.peak-img { width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); margin-bottom: 1rem; }
-body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
+.peak-img { width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.35); margin-bottom: 1rem; border: 1px solid var(--border-subtle); }
+body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
 .peak-info ul { line-height: 1.7; padding-left: 20px; }
 .peak-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
+
+/* =========================
+   STATS SECTION (Phase 1.1)
+   ========================= */
+.stats-section {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+body.dark .stats-section {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stat-item {
+  padding: 1.5rem 1rem;
+}
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent-cyan);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.5rem;
+}
+body.dark .stat-number {
+  color: var(--accent-cyan);
+}
+.stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+body.dark .stat-label {
+  color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .stat-number { font-size: 2.5rem; }
+  .stats-grid { gap: 1rem; }
+}
+
+/* =========================
+   MOBILE HAMBURGER MENU (Phase 1.2)
+   ========================= */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: inline-flex; }
+  nav ul {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 220px;
+    height: calc(100vh - 70px);
+    background: var(--bg-secondary);
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.5);
+    transform: translateX(100%);
+    transition: transform 240ms ease;
+    z-index: 99;
+    border-left: 1px solid var(--border-subtle);
+  }
+  body.dark nav ul {
+    background: var(--bg-secondary);
+    box-shadow: -4px 0 12px rgba(0,0,0,0.6);
+  }
+  nav ul.open {
+    transform: translateX(0);
+  }
+  nav ul li a {
+    display: block;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+/* =========================
+   PARALLAX ORBS (Phase 1.3)
+   ========================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.hero::before {
+  width: 320px;
+  height: 320px;
+  background: rgba(0, 229, 255, 0.20);
+  top: -80px;
+  right: -60px;
+}
+.hero::after {
+  width: 240px;
+  height: 240px;
+  background: rgba(123, 47, 247, 0.18);
+  bottom: -60px;
+  left: -40px;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .hero::after { transform: none !important; }
+}
+
+/* =========================
+   HAMBURGER TOGGLE
+   ========================= */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* =========================
+   GLASS CARD (Phase 2.1: Lab style)
+   ========================= */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: border-color var(--sc-d-hover, 180ms) ease,
+              transform var(--sc-d-hover, 180ms) ease,
+              box-shadow var(--sc-d-hover, 180ms) ease;
+}
+.glass-card:hover {
+  border-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 8px 40px rgba(0, 229, 255, 0.08);
+  transform: translateY(-4px);
+}
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
@@ -468,15 +661,6 @@ body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
 
 /* Responsive */
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    display: none;
-  }
-
-  nav ul.show {
-    display: flex;
-  }
-
   .about-content {
     flex-direction: column;
   }
@@ -494,8 +678,8 @@ body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
 /* Certificate Verify Button */
 .btn-verify {
   background: transparent;
-  border: 2px solid #4a90e2;
-  color: #4a90e2;
+  border: 2px solid var(--accent-cyan);
+  color: var(--accent-cyan);
   font-size: 0.85rem;
   padding: 8px 16px;
   min-width: auto;
@@ -503,18 +687,18 @@ body.dark .peak-img { box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
 }
 
 .btn-verify:hover {
-  background: #4a90e2;
-  color: #fff;
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
 }
 
 body.dark .btn-verify {
-  border-color: #6aaeff;
-  color: #6aaeff;
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 body.dark .btn-verify:hover {
-  background: #6aaeff;
-  color: #121212;
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
 }
 
 
