@@ -129,6 +129,39 @@
             overflow-x: hidden;
         }
 
+        /* Certificate Modal */
+        .cert-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 2rem;
+        }
+        .cert-modal.open { display: flex; }
+        .cert-modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        .cert-modal .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10000;
+            line-height: 1;
+        }
+        .cert-modal .close:hover { color: var(--accent-cyan); }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -819,18 +852,54 @@
                 <div data-sc-in>
                     <h3 class="text-lg font-semibold mb-6">Tech Stack</h3>
                     <div class="grid grid-cols-4 gap-3" id="techGrid">
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Python</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">TF</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">PyTorch</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Scikit</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Pandas</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">NumPy</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">React</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Next.js</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">n8n</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">PowerBI</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Streamlit</span></div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center"><span class="text-xs font-medium text-text-secondary">Git</span></div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Python">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Python</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="TensorFlow">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">TF</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="PyTorch">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">PyTorch</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="scikit-learn">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="scikit-learn" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Scikit</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Pandas">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Pandas</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="NumPy">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">NumPy</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="React">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">React</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Next.js">
+                            <img src="https://cdn.simpleicons.org/nextdotjs/FFFFFF" alt="Next.js" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Next.js</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="n8n">
+                            <img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">n8n</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Microsoft Power BI">
+                            <img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">PowerBI</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Streamlit">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg" alt="Streamlit" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Streamlit</span>
+                        </div>
+                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Git">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-xs font-medium text-text-secondary" style="display:none">Git</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -864,7 +933,10 @@
                                     <span class="inline-flex items-center gap-1"><i data-lucide="building" class="w-3 h-3"></i> Google / Coursera</span>
                                     <span class="inline-flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3"></i> 2026</span>
                                 </div>
-                                <div class="flex gap-3">
+                                <div class="flex flex-wrap gap-4">
+                                    <button type="button" class="open-cert text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors" data-img="cert3.jpg">
+                                        <i data-lucide="image" class="w-4 h-4"></i> View Certificate
+                                    </button>
                                     <a href="https://www.coursera.org/account/accomplishments/specialization/206DYSPCGZ4X" target="_blank" rel="noopener noreferrer" class="text-accent-cyan font-medium text-sm inline-flex items-center gap-1 hover:underline">
                                         Verify <i data-lucide="external-link" class="w-4 h-4"></i>
                                     </a>
@@ -891,7 +963,10 @@
                                     <span class="inline-flex items-center gap-1"><i data-lucide="building" class="w-3 h-3"></i> Google / Coursera</span>
                                     <span class="inline-flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3"></i> 2026</span>
                                 </div>
-                                <div class="flex gap-3">
+                                <div class="flex flex-wrap gap-4">
+                                    <button type="button" class="open-cert text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors" data-img="cert2.jpg">
+                                        <i data-lucide="image" class="w-4 h-4"></i> View Certificate
+                                    </button>
                                     <a href="https://www.coursera.org/account/accomplishments/professional-cert/SH40BMD31ECC" target="_blank" rel="noopener noreferrer" class="text-accent-cyan font-medium text-sm inline-flex items-center gap-1 hover:underline">
                                         Verify <i data-lucide="external-link" class="w-4 h-4"></i>
                                     </a>
@@ -913,10 +988,15 @@
                             </div>
                             <h3 class="text-xl font-bold mb-2">AI Engineer</h3>
                             <p class="text-text-secondary text-sm mb-4">Penerapan Artificial Intelligence (AI) untuk Proses Data – BNSP</p>
-                            <div class="flex flex-wrap gap-3 text-xs text-text-muted">
+                            <div class="flex flex-wrap gap-3 text-xs text-text-muted mb-4">
                                 <span class="inline-flex items-center gap-1"><i data-lucide="building" class="w-3 h-3"></i> BNSP — LSP AI Indonesia</span>
                                 <span class="inline-flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3"></i> Nov 2025</span>
                                 <span class="inline-flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> Valid 3 Years</span>
+                            </div>
+                            <div class="flex flex-wrap gap-4">
+                                <button type="button" class="open-cert text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors" data-img="cert1.jpg">
+                                    <i data-lucide="image" class="w-4 h-4"></i> View Certificate
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -958,18 +1038,44 @@
                 <!-- Contact Info -->
                 <div class="flex flex-col justify-center" data-sc-in>
                     <div class="space-y-6">
-                        <a href="mailto:rahmansyahheri@gmail.com" class="social-link flex items-center gap-4 text-text-secondary">
+                        <a href="https://wa.me/6282125495080" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
                             <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" style="color: #25D366;" aria-label="WhatsApp">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-text-muted">Email</p>
-                                <p class="font-medium">rahmansyahheri@gmail.com</p>
+                                <p class="text-sm text-text-muted">WhatsApp</p>
+                                <p class="font-medium">+62 821-2549-5080</p>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/herirahmansyah" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
+                            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" style="color: #E4405F;" aria-label="Instagram">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-text-muted">Instagram</p>
+                                <p class="font-medium">@herirahmansyah</p>
+                            </div>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100082456091803" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
+                            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" style="color: #1877F2;" aria-label="Facebook">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-text-muted">Facebook</p>
+                                <p class="font-medium">Heri Rahmansyah</p>
                             </div>
                         </a>
                         <a href="https://www.linkedin.com/in/heri-rahmansyah-68b166380/" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
                             <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" style="color: #0A66C2;" aria-label="LinkedIn">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
                             </div>
                             <div>
                                 <p class="text-sm text-text-muted">LinkedIn</p>
@@ -978,20 +1084,25 @@
                         </a>
                         <a href="https://github.com/herirahmansyah" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
                             <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                <i data-lucide="github" class="w-5 h-5"></i>
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" style="color: #FFFFFF;" aria-label="GitHub">
+                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                </svg>
                             </div>
                             <div>
                                 <p class="text-sm text-text-muted">GitHub</p>
                                 <p class="font-medium">github.com/herirahmansyah</p>
                             </div>
                         </a>
-                        <a href="https://wa.me/6282125495080" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-4 text-text-secondary">
+                        <a href="mailto:rahmansyahheri@gmail.com" class="social-link flex items-center gap-4 text-text-secondary">
                             <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                <i data-lucide="phone" class="w-5 h-5"></i>
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #EA4335;" aria-label="Email">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-text-muted">WhatsApp</p>
-                                <p class="font-medium">+62 821-2549-5080</p>
+                                <p class="text-sm text-text-muted">Email</p>
+                                <p class="font-medium">rahmansyahheri@gmail.com</p>
                             </div>
                         </a>
                     </div>
@@ -1030,6 +1141,12 @@
         </div>
     </footer>
 
+    <!-- Certificate Modal -->
+    <div id="certModal" class="cert-modal">
+        <span class="close">&times;</span>
+        <img id="certImage" src="" alt="Certificate Preview">
+    </div>
+
     <!-- JavaScript -->
     <script>
         // Initialize Lucide Icons + ScrollCraft-style reveal animations
@@ -1048,7 +1165,31 @@
             initSmoothScroll();
             initNavActive();
             initNavbarScroll();
+            initCertModal();
         });
+
+        // Certificate Modal
+        function initCertModal() {
+            const certModal = document.getElementById("certModal");
+            const certImg = document.getElementById("certImage");
+            if (!certModal || !certImg) return;
+
+            document.querySelectorAll(".open-cert").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    certImg.src = btn.dataset.img;
+                    certModal.classList.add("open");
+                });
+            });
+
+            const close = () => {
+                certModal.classList.remove("open");
+                certImg.src = "";
+            };
+
+            certModal.querySelector(".close").addEventListener("click", close);
+            certModal.addEventListener("click", e => { if (e.target === certModal) close(); });
+            document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+        }
 
         // Mobile Menu
         function initMobileMenu() {
