@@ -344,7 +344,18 @@
     }
   });
 
-  /* ── 9. Export helper — bisa dipakai dari luar jika perlu ── */
+  /* ── 9. Page Visibility — pause when tab hidden (battery/CPU saver) ── */
+  let pageVisible = !document.hidden;
+  document.addEventListener('visibilitychange', () => {
+    pageVisible = !document.hidden;
+    if (pageVisible) {
+      startLoop();
+    } else {
+      stopLoop();
+    }
+  });
+
+  /* ── 10. Export helper — bisa dipakai dari luar jika perlu ── */
   window.BoidsHero = {
     scatter() {
       boids.forEach(b => {
