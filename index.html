@@ -1534,8 +1534,8 @@
             const heroSection = document.getElementById('home');
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            const FRAME_COUNT = 180;
-            const FRAME_PATH = 'Portofolio/ezgif-6ad664561c7cb3ed-png-split/ezgif-frame-';
+            const FRAME_COUNT = 90;
+            const FRAME_PATH = 'Portofolio/animation/frame-';
             const BATCH_SIZE = 30; // load frames in batches of 30
 
             const images = [];
@@ -1545,7 +1545,7 @@
 
             // Build frame URLs (frames are 1-indexed: 001..180)
             function frameUrl(i) {
-                return FRAME_PATH + String(i + 1).padStart(3, '0') + '.png';
+                return FRAME_PATH + String(i + 1).padStart(3, '0') + '.webp';
             }
 
             // Resize canvas to match container
