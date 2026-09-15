@@ -25,19 +25,26 @@
   --sc-d-skill: 1.2s;
   --sc-d-modal: 380ms;
   --sc-d-hover: 180ms;
+
+  /* Refined spacing rhythm */
+  --space-section: 7rem;
+  --space-section-sm: 4.5rem;
+  --radius-card: 16px;
+  --radius-lg: 24px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
 }
 
 body {
   line-height: 1.6;
   color: var(--text-secondary);
   background: var(--bg-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 .dark-toggle {
   background: none;
@@ -68,7 +75,7 @@ body.dark .section {
   background: var(--bg-primary);
 }
 
-body.dark .project {
+body.dark .project-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   backdrop-filter: blur(20px);
@@ -82,11 +89,12 @@ body.dark .progress-bar {
 header {
   position: fixed;
   width: 100%;
-  background: var(--bg-secondary);
+  background: rgba(10, 10, 10, 0.85);
   border-bottom: 1px solid var(--border-subtle);
   z-index: 100;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  transition: background 300ms ease;
 }
 
 nav {
@@ -280,7 +288,7 @@ nav ul li a {
 
 /* Section — hidden only when JS reveal is armed (.reveal-active) */
 .section {
-  padding: 5rem 2rem;
+  padding: var(--space-section) 2rem;
 }
 
 .reveal-active .section {
@@ -642,7 +650,7 @@ body.menu-open {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
+  border-radius: var(--radius-card, 16px);
   transition: border-color var(--sc-d-hover, 180ms) ease,
               transform var(--sc-d-hover, 180ms) ease,
               box-shadow var(--sc-d-hover, 180ms) ease;
@@ -653,10 +661,64 @@ body.menu-open {
   transform: translateY(-4px);
 }
 
+/* =========================
+   PROJECT CARD (redesign refinement)
+   ========================= */
+.project-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-card, 16px);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  transition: border-color var(--sc-d-hover, 180ms) ease,
+              transform var(--sc-d-hover, 180ms) ease,
+              box-shadow var(--sc-d-hover, 180ms) ease;
+}
+.project-card:hover {
+  border-color: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  transform: translateY(-6px);
+}
+
+/* =========================
+   CERTIFICATE CARD (redesign refinement)
+   ========================= */
+.cert-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 16px);
+  transition: border-color var(--sc-d-hover, 180ms) ease,
+              transform var(--sc-d-hover, 180ms) ease,
+              box-shadow var(--sc-d-hover, 180ms) ease;
+}
+.cert-card:hover {
+  border-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 8px 40px rgba(0, 229, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+/* =========================
+   SKILL BAR (aligned with index.html)
+   ========================= */
+.skill-bar-bg {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--gradient-skill);
+  width: 0%;
+  transition: width 1.2s ease-out;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .section, .fade-up, .progress { transition: none !important; opacity: 1 !important; transform: none !important; }
-  .btn, .btn-outline { transition: none !important; }
+  .section, .fade-up, .progress, .skill-bar-fill { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .btn, .btn-outline, .glass-card, .project-card, .cert-card { transition: none !important; }
 }
 
 /* Responsive */
@@ -673,6 +735,12 @@ body.menu-open {
     width: 100%;
     max-width: 100%;
   }
+
+  /* Mobile section spacing refinement */
+  .section { padding: var(--space-section-sm) 1.25rem; }
+
+  /* Maintain mobile menu behavior */
+  .menu-toggle { display: inline-flex; }
  }
 
 /* Certificate Verify Button */

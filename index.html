@@ -120,6 +120,9 @@
             --sc-d-cue: 620ms;
             --sc-d-modal: 380ms;
             --sc-d-hover: 180ms;
+            --radius-card: 16px;
+            --radius-lg: 24px;
+            --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -188,6 +191,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-card);
             transition: all 300ms ease;
         }
         .glass-card:hover {
@@ -199,12 +203,14 @@
         /* Project Card */
         .project-card {
             background: var(--bg-secondary);
-            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-card);
             overflow: hidden;
             transition: all 300ms ease;
         }
         .project-card:hover {
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+            border-color: rgba(0, 229, 255, 0.2);
             transform: translateY(-8px);
         }
         .project-card:hover .project-img { transform: scale(1.05); }
@@ -246,16 +252,16 @@
         /* Skill Bar */
         .skill-bar-bg {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
+            border-radius: 999px;
             height: 8px;
             overflow: hidden;
         }
         .skill-bar-fill {
             height: 100%;
-            border-radius: 4px;
+            border-radius: 999px;
             background: linear-gradient(90deg, #00E5FF, #7B2FF7);
             width: 0%;
-            transition: width 1.2s ease-out;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Nav Link Hover */
@@ -271,8 +277,7 @@
             width: 0;
             height: 2px;
             background: var(--accent-cyan);
-            transition: width 200ms ease;
-            box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+            transition: width 220ms var(--ease-expo);
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         .nav-link:hover, .nav-link.active { color: var(--accent-cyan); }
@@ -310,7 +315,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(100px);
-            opacity: 0.20;
+            opacity: 0.18;
             pointer-events: none;
         }
 
@@ -358,17 +363,18 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             transition: all 300ms ease;
         }
         .cert-card:hover {
             border-color: rgba(0, 229, 255, 0.3);
             box-shadow: 0 8px 40px rgba(0, 229, 255, 0.08);
+            transform: translateY(-4px);
         }
 
         /* Profile photo glow */
         .profile-glow { transition: box-shadow 300ms ease; }
-        .profile-glow:hover { box-shadow: 0 0 40px rgba(0, 229, 255, 0.2); }
+        .profile-glow:hover { box-shadow: 0 0 40px rgba(0, 229, 255, 0.15); }
 
         /* Smooth scroll offset for fixed nav */
         html { scroll-padding-top: 80px; }
@@ -403,16 +409,100 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        /* Refined section label */
+        .section-label {
+            letter-spacing: 0.2em;
+        }
+
+        /* Subtle hover lift shared utility */
+        .hover-lift { transition: transform 200ms var(--ease-expo); }
+        .hover-lift:hover { transform: translateY(-3px); }
+
+        /* ─── Hero Canvas (scroll-driven frame animation) ─── */
+        .hero-canvas-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 600ms ease;
+        }
+        .hero-canvas-wrap canvas.ready { opacity: 1; }
+
+        .hero-canvas-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(10,10,10,0.6) 0%,
+                rgba(10,10,10,0.3) 40%,
+                rgba(10,10,10,0.5) 100%);
+            pointer-events: none;
+        }
+
+        /* ─── Hero Loader ─── */
+        .hero-loader {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            transition: opacity 500ms ease, visibility 500ms ease;
+        }
+        .hero-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .hero-loader-inner { text-align: center; }
+        .hero-loader-bar-track {
+            width: 200px;
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 0 auto 12px;
+        }
+        .hero-loader-bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: width 120ms ease;
+        }
+        .hero-loader-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── Reduced Motion: static frame fallback ─── */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-canvas-wrap canvas { transition: none; }
+        }
     </style>
 </head>
 <body class="bg-bg-primary text-text-primary antialiased">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(10,10,10,0.8); backdrop-filter: blur(20px);">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5" style="background: rgba(10,10,10,0.8); backdrop-filter: blur(20px);">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-[72px]">
-                <a href="#" class="flex items-center">
-                    <img src="favicon/favicon-96x96.png" alt="HR Logo" style="height:36px; width:36px; object-fit:contain;">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <img src="favicon/favicon-96x96.png" alt="HR Logo" style="height:36px; width:36px; object-fit:contain;" class="transition-transform duration-300 group-hover:scale-105">
+                    <span class="hidden sm:block text-sm font-semibold tracking-widest text-text-secondary group-hover:text-white transition-colors">HERI&nbsp;RAHMANSYAH</span>
                 </a>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#home" class="nav-link text-sm font-medium uppercase tracking-widest text-text-secondary">Home</a>
@@ -425,7 +515,7 @@
                 <a href="#contact" class="hidden md:inline-flex btn-glow px-6 py-2.5 rounded-xl text-sm font-semibold">
                     Let's Talk
                 </a>
-                <button id="menuBtn" class="md:hidden text-white p-2">
+                <button id="menuBtn" class="md:hidden text-white p-2" aria-label="Open menu">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -437,7 +527,7 @@
         <div class="flex flex-col h-full p-6">
             <div class="flex justify-between items-center mb-12">
                 <img src="favicon/favicon-96x96.png" alt="HR Logo" style="height:36px; width:36px; object-fit:contain;">
-                <button id="closeMenuBtn" class="text-white p-2">
+                <button id="closeMenuBtn" class="text-white p-2" aria-label="Close menu">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -457,18 +547,34 @@
 
     <!-- Hero Section (ScrollCraft: scrub + cue) -->
     <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-[72px]">
+        <!-- Scroll-driven animation canvas -->
+        <div id="heroCanvasWrap" class="hero-canvas-wrap">
+            <canvas id="heroCanvas"></canvas>
+            <div id="heroCanvasOverlay" class="hero-canvas-overlay"></div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="heroLoader" class="hero-loader">
+            <div class="hero-loader-inner">
+                <div class="hero-loader-bar-track">
+                    <div id="heroLoaderBar" class="hero-loader-bar-fill"></div>
+                </div>
+                <p id="heroLoaderText" class="hero-loader-text">Loading frames… 0%</p>
+            </div>
+        </div>
+
         <div class="gradient-orb w-[600px] h-[600px] bg-accent-cyan top-[-200px] right-[-100px]"></div>
         <div class="gradient-orb w-[400px] h-[400px] bg-accent-purple bottom-[-100px] left-[-100px]"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="hero-stagger" id="heroContent">
-                    <p class="text-sm uppercase tracking-[0.2em] text-text-muted mb-6">AI Engineer | Data Analyst | Web Developer</p>
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-6">
+                    <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-text-muted mb-6">AI Engineer | Data Analyst | Web Developer</p>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.02] tracking-tight mb-6">
                         AI + Data +<br>
                         <span class="gradient-text">Automation</span>
                     </h1>
-                    <p class="text-lg text-text-secondary max-w-lg mb-8 leading-relaxed">
+                    <p class="text-base sm:text-lg text-text-secondary max-w-lg mb-8 leading-relaxed">
                         Building intelligent systems that transform raw data into actionable business insights. Specializing in ML models, data analytics, and workflow automation.
                     </p>
                     <div class="flex flex-wrap gap-4">
@@ -483,7 +589,7 @@
                     </div>
                 </div>
                 <div class="hidden lg:flex justify-center items-center" data-sc-in>
-                    <div class="relative">
+                    <div class="relative hover-lift">
                         <div class="w-80 h-80 rounded-full bg-gradient-to-br from-accent-cyan/20 to-accent-purple/20 blur-3xl absolute inset-0"></div>
                         <div class="relative glass-card rounded-3xl p-8 w-80">
                             <div class="font-mono text-xs text-text-muted mb-4">$ python -c "import intelligence"</div>
@@ -519,24 +625,24 @@
     </section>
 
     <!-- Stats Section (ScrollCraft: flow reveal) -->
-    <section class="py-20 lg:py-28">
+    <section class="py-20 lg:py-28 relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
-                <div class="text-center" data-sc-in>
+                <div class="text-center group" data-sc-in>
                     <div class="counter text-5xl lg:text-6xl font-black text-white mb-2" data-target="9">9</div>
-                    <div class="text-sm uppercase tracking-widest text-text-muted">Projects</div>
+                    <div class="text-sm uppercase tracking-widest text-text-muted group-hover:text-text-secondary transition-colors">Projects</div>
                 </div>
-                <div class="text-center" data-sc-in>
+                <div class="text-center group" data-sc-in>
                     <div class="counter text-5xl lg:text-6xl font-black text-white mb-2" data-target="3">3</div>
-                    <div class="text-sm uppercase tracking-widest text-text-muted">Certifications</div>
+                    <div class="text-sm uppercase tracking-widest text-text-muted group-hover:text-text-secondary transition-colors">Certifications</div>
                 </div>
-                <div class="text-center" data-sc-in>
+                <div class="text-center group" data-sc-in>
                     <div class="counter text-5xl lg:text-6xl font-black text-white mb-2" data-target="7">7</div>
-                    <div class="text-sm uppercase tracking-widest text-text-muted">Core Skills</div>
+                    <div class="text-sm uppercase tracking-widest text-text-muted group-hover:text-text-secondary transition-colors">Core Skills</div>
                 </div>
-                <div class="text-center" data-sc-in>
+                <div class="text-center group" data-sc-in>
                     <div class="counter text-5xl lg:text-6xl font-black text-white mb-2" data-target="100" data-suffix="%">100%</div>
-                    <div class="text-sm uppercase tracking-widest text-text-muted">Open Source</div>
+                    <div class="text-sm uppercase tracking-widest text-text-muted group-hover:text-text-secondary transition-colors">Open Source</div>
                 </div>
             </div>
             <div class="section-divider mb-16"></div>
@@ -552,7 +658,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div class="reveal order-2 lg:order-1">
-                    <p class="text-xs uppercase tracking-[0.2em] text-accent-cyan mb-4 font-medium">About Me</p>
+                    <p class="text-xs uppercase tracking-[0.25em] text-accent-cyan mb-4 font-medium section-label">About Me</p>
                     <h2 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">Engineering<br>Intelligence</h2>
                     <p class="text-text-secondary leading-relaxed mb-6">
                         I am an AI Engineer, Data Analyst, and Web Developer experienced in developing machine learning models, analyzing complex data, and building modern web applications. My core expertise lies in creating scalable AI solutions and transforming raw data into actionable business insights.
@@ -572,7 +678,7 @@
                     </div>
                 </div>
                 <div class="reveal order-1 lg:order-2 flex justify-center">
-                    <div class="relative">
+                    <div class="relative hover-lift">
                         <div class="absolute inset-0 bg-gradient-to-br from-accent-cyan/30 to-accent-purple/30 rounded-2xl blur-2xl"></div>
                         <img src="https://herirahmansyah.github.io/photo.jpg"
                              alt="Heri Rahmansyah"
@@ -593,42 +699,42 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children" id="expertiseGrid">
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-cyan/10 flex items-center justify-center mb-6">
                         <i data-lucide="brain" class="w-7 h-7 text-accent-cyan"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Machine Learning</h3>
                     <p class="text-text-secondary text-sm leading-relaxed">Custom ML models, predictive analytics, and model deployment for real-world business problems.</p>
                 </div>
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-purple/10 flex items-center justify-center mb-6">
                         <i data-lucide="bar-chart-3" class="w-7 h-7 text-accent-purple"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Data Analytics</h3>
                     <p class="text-text-secondary text-sm leading-relaxed">Power BI dashboards, statistical analysis, and business intelligence solutions.</p>
                 </div>
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-cyan/10 flex items-center justify-center mb-6">
                         <i data-lucide="workflow" class="w-7 h-7 text-accent-cyan"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Workflow Automation</h3>
                     <p class="text-text-secondary text-sm leading-relaxed">n8n pipelines, Python automation, and process optimization for efficiency.</p>
                 </div>
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-purple/10 flex items-center justify-center mb-6">
                         <i data-lucide="shield-check" class="w-7 h-7 text-accent-purple"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">AI Quality Assurance</h3>
                     <p class="text-text-secondary text-sm leading-relaxed">LLM-as-a-Judge evaluation, AI response grading, and safety checks.</p>
                 </div>
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-cyan/10 flex items-center justify-center mb-6">
                         <i data-lucide="code-2" class="w-7 h-7 text-accent-cyan"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Full-Stack Development</h3>
                     <p class="text-text-secondary text-sm leading-relaxed">Modern web applications with React, Next.js, Node.js, and responsive design.</p>
                 </div>
-                <div class="glass-card rounded-2xl p-8" data-sc-in>
+                <div class="glass-card rounded-2xl p-8 hover-lift" data-sc-in>
                     <div class="w-14 h-14 rounded-xl bg-accent-purple/10 flex items-center justify-center mb-6">
                         <i data-lucide="plug" class="w-7 h-7 text-accent-purple"></i>
                     </div>
@@ -643,15 +749,15 @@
     <section id="portfolio" class="py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16" data-sc-in>
-                <p class="text-xs uppercase tracking-[0.2em] text-accent-cyan mb-4 font-medium">Portfolio</p>
+                <p class="text-xs uppercase tracking-[0.25em] text-accent-cyan mb-4 font-medium section-label">Portfolio</p>
                 <h2 class="text-3xl lg:text-4xl font-bold mb-4">Selected Works</h2>
                 <p class="text-text-secondary">Projects in AI, Data, and Automation</p>
             </div>
 
             <!-- Featured: BangHeri AI Data Analyst -->
             <div class="project-card mb-8" data-sc-in>
-                <div class="grid lg:grid-cols-2">
-                    <div class="overflow-hidden">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="overflow-hidden relative">
                         <img src="https://herirahmansyah.github.io/bangheri-home.png"
                              alt="BangHeri AI Data Analyst"
                              class="project-img w-full h-64 lg:h-full object-cover"
@@ -762,7 +868,7 @@
                             <span class="tech-tag">AI</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
-                            <a href="https://rekrutpintar.bangheri.my.id/" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm inline-flex items-center gap-1">
+                            <a href="https://rekrutpintar.bangheri.my.id/" target="_blank" rel="noopener noreferrer" class="btn-glow px-4 py-2 rounded-lg text-sm inline-flex items-center gap-1">
                                 <i data-lucide="external-link" class="w-4 h-4"></i> Live Preview
                             </a>
                             <a href="project2.html" class="text-text-secondary font-medium text-sm inline-flex items-center gap-1 hover:text-white transition-colors">
@@ -773,14 +879,14 @@
                 </div>
 
                 <div class="project-card md:col-span-2" data-sc-in>
-                    <div class="grid md:grid-cols-2">
-                        <div class="overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop"
                                  alt="CafeBangHeri"
                                  class="project-img w-full h-48 md:h-full object-cover"
                                  onerror="this.src='project3.png'; this.style.objectFit='cover'">
                         </div>
-                        <div class="p-6 flex flex-col justify-center">
+                        <div class="p-6 lg:p-8 flex flex-col justify-center">
                             <h3 class="text-xl font-bold mb-2">CafeBangHeri — Coffee Shop Website</h3>
                             <p class="text-text-secondary text-sm mb-4 leading-relaxed">A modern coffee shop website with an elegant design, focused on branding, user experience, and visual storytelling.</p>
                             <div class="flex flex-wrap gap-2 mb-4">
@@ -802,7 +908,7 @@
     <section id="skills" class="py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16" data-sc-in>
-                <p class="text-xs uppercase tracking-[0.2em] text-accent-cyan mb-4 font-medium">Skills</p>
+                <p class="text-xs uppercase tracking-[0.25em] text-accent-cyan mb-4 font-medium section-label">Skills</p>
                 <h2 class="text-3xl lg:text-4xl font-bold mb-4">Skills & Technologies</h2>
                 <p class="text-text-secondary">Technologies I work with daily</p>
             </div>
@@ -868,51 +974,51 @@
                 <div data-sc-in>
                     <h3 class="text-lg font-semibold mb-6">Tech Stack</h3>
                     <div class="grid grid-cols-4 gap-3" id="techGrid">
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Python">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Python">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Python</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="TensorFlow">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="TensorFlow">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">TF</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="PyTorch">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="PyTorch">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">PyTorch</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="scikit-learn">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="scikit-learn">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="scikit-learn" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Scikit</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Pandas">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Pandas">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Pandas</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="NumPy">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="NumPy">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">NumPy</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="React">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="React">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">React</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Next.js">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Next.js">
                             <img src="https://cdn.simpleicons.org/nextdotjs/FFFFFF" alt="Next.js" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Next.js</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="n8n">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="n8n">
                             <img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">n8n</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Microsoft Power BI">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Microsoft Power BI">
                             <img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">PowerBI</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Streamlit">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Streamlit">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg" alt="Streamlit" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Streamlit</span>
                         </div>
-                        <div class="tech-icon-card aspect-square flex items-center justify-center" title="Git">
+                        <div class="tech-icon-card aspect-square flex items-center justify-center hover-lift" title="Git">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-12 h-12" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-xs font-medium text-text-secondary" style="display:none">Git</span>
                         </div>
@@ -1199,6 +1305,7 @@
             initNavbarScroll();
             initCertModal();
             initPreviewModal();
+            initHeroFrameAnimation();
         });
 
         // Certificate Modal
@@ -1383,6 +1490,160 @@
                     navbar.style.background = 'rgba(10, 10, 10, 0.8)';
                 }
             });
+        }
+
+        // ─── Hero Scroll-Driven Frame Animation ───
+        function initHeroFrameAnimation() {
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            const loader = document.getElementById('heroLoader');
+            const loaderBar = document.getElementById('heroLoaderBar');
+            const loaderText = document.getElementById('heroLoaderText');
+            const heroSection = document.getElementById('home');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const FRAME_COUNT = 180;
+            const FRAME_PATH = 'Portofolio/ezgif-6ad664561c7cb3ed-png-split/ezgif-frame-';
+            const BATCH_SIZE = 30; // load frames in batches of 30
+
+            const images = [];
+            let loadedCount = 0;
+            let ready = false;
+            let currentDrawnFrame = -1;
+
+            // Build frame URLs (frames are 1-indexed: 001..180)
+            function frameUrl(i) {
+                return FRAME_PATH + String(i + 1).padStart(3, '0') + '.png';
+            }
+
+            // Resize canvas to match container
+            function resizeCanvas() {
+                const w = heroSection.offsetWidth;
+                const h = heroSection.offsetHeight;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                // Redraw current frame after resize
+                if (ready && currentDrawnFrame >= 0) {
+                    drawFrame(currentDrawnFrame);
+                }
+            }
+
+            function drawFrame(index) {
+                if (index < 0 || index >= FRAME_COUNT || !images[index]) return;
+                if (!images[index].complete || !images[index].naturalWidth) return;
+                currentDrawnFrame = index;
+                const w = heroSection.offsetWidth;
+                const h = heroSection.offsetHeight;
+                ctx.clearRect(0, 0, w, h);
+
+                // Cover-mode draw (fill canvas preserving aspect ratio)
+                const img = images[index];
+                const imgRatio = img.naturalWidth / img.naturalHeight;
+                const canvasRatio = w / h;
+                let drawW, drawH, drawX, drawY;
+                if (canvasRatio > imgRatio) {
+                    drawW = w;
+                    drawH = w / imgRatio;
+                    drawX = 0;
+                    drawY = (h - drawH) / 2;
+                } else {
+                    drawH = h;
+                    drawW = h * imgRatio;
+                    drawX = (w - drawW) / 2;
+                    drawY = 0;
+                }
+                ctx.drawImage(img, drawX, drawY, drawW, drawH);
+            }
+
+            // Preload frames in batches
+            function loadBatch(startIdx, endIdx, callback) {
+                let batchLoaded = 0;
+                const batchCount = endIdx - startIdx;
+                for (let i = startIdx; i < endIdx; i++) {
+                    const img = new Image();
+                    img.src = frameUrl(i);
+                    img.onload = img.onerror = function() {
+                        batchLoaded++;
+                        loadedCount++;
+                        const pct = Math.round((loadedCount / FRAME_COUNT) * 100);
+                        loaderBar.style.width = pct + '%';
+                        loaderText.textContent = 'Loading frames… ' + pct + '%';
+                        if (batchLoaded === batchCount) callback();
+                    };
+                    images[i] = img;
+                }
+            }
+
+            function loadNextBatch(batchStart) {
+                const batchEnd = Math.min(batchStart + BATCH_SIZE, FRAME_COUNT);
+                loadBatch(batchStart, batchEnd, function() {
+                    if (batchEnd < FRAME_COUNT) {
+                        loadNextBatch(batchEnd);
+                    } else {
+                        // All frames loaded
+                        onAllFramesLoaded();
+                    }
+                });
+            }
+
+            function onAllFramesLoaded() {
+                ready = true;
+                resizeCanvas();
+                loader.classList.add('hidden');
+                canvas.classList.add('ready');
+
+                // If reduced motion, just show frame 1 and stop
+                if (reducedMotion) {
+                    drawFrame(0);
+                    return;
+                }
+
+                // Initial render
+                drawFrame(getFrameFromScroll());
+            }
+
+            function getFrameFromScroll() {
+                const scrollY = window.scrollY || window.pageYOffset;
+                // Map scroll within hero section height to frames
+                const heroHeight = heroSection.offsetHeight;
+                const fraction = Math.min(1, Math.max(0, scrollY / heroHeight));
+                return Math.floor(fraction * (FRAME_COUNT - 1));
+            }
+
+            function onScroll() {
+                if (!ready || reducedMotion) return;
+                const frameIdx = getFrameFromScroll();
+                if (frameIdx !== currentDrawnFrame) {
+                    drawFrame(frameIdx);
+                }
+            }
+
+            // Throttle scroll with rAF
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        onScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Handle resize
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(resizeCanvas, 100);
+            }, { passive: true });
+
+            // Start loading
+            resizeCanvas();
+            loadNextBatch(0);
         }
     </script>
 </body>
