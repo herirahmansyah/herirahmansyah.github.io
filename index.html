@@ -419,11 +419,11 @@
         .hover-lift { transition: transform 200ms var(--ease-expo); }
         .hover-lift:hover { transform: translateY(-3px); }
 
-        /* ─── Hero Canvas (scroll-driven frame animation) ─── */
+        /* ─── Page Canvas (scroll-driven frame animation, full page) ─── */
         .hero-canvas-wrap {
-            position: absolute;
+            position: fixed;
             inset: 0;
-            z-index: 0;
+            z-index: -1; /* always the back layer, behind all sections */
             pointer-events: none;
             display: flex;
             align-items: center;
@@ -1314,8 +1314,6 @@
         <img id="previewGif" src="" alt="Live Preview GIF" loading="lazy">
     </div>
 
-    <!-- Boids Flocking Animation (hero background) -->
-    <script src="boids.js"></script>
 
     <!-- JavaScript -->
     <script>
@@ -1531,7 +1529,6 @@
             const loader = document.getElementById('heroLoader');
             const loaderBar = document.getElementById('heroLoaderBar');
             const loaderText = document.getElementById('heroLoaderText');
-            const heroSection = document.getElementById('home');
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             const FRAME_COUNT = 90;
@@ -1548,10 +1545,10 @@
                 return FRAME_PATH + String(i + 1).padStart(3, '0') + '.webp';
             }
 
-            // Resize canvas to match container
+            // Resize canvas to the fixed full-viewport wrap
             function resizeCanvas() {
-                const w = heroSection.offsetWidth;
-                const h = heroSection.offsetHeight;
+                const w = window.innerWidth;
+                const h = window.innerHeight;
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 canvas.width = w * dpr;
                 canvas.height = h * dpr;
@@ -1568,8 +1565,8 @@
                 if (index < 0 || index >= FRAME_COUNT || !images[index]) return;
                 if (!images[index].complete || !images[index].naturalWidth) return;
                 currentDrawnFrame = index;
-                const w = heroSection.offsetWidth;
-                const h = heroSection.offsetHeight;
+                const w = window.innerWidth;
+                const h = window.innerHeight;
                 ctx.clearRect(0, 0, w, h);
 
                 // Cover-mode draw (fill canvas preserving aspect ratio)
@@ -1640,9 +1637,9 @@
 
             function getFrameFromScroll() {
                 const scrollY = window.scrollY || window.pageYOffset;
-                // Map scroll within hero section height to frames
-                const heroHeight = heroSection.offsetHeight;
-                const fraction = Math.min(1, Math.max(0, scrollY / heroHeight));
+                // Map scroll across the ENTIRE page height to frames
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const fraction = Math.min(1, Math.max(0, maxScroll > 0 ? scrollY / maxScroll : 0));
                 return Math.floor(fraction * (FRAME_COUNT - 1));
             }
 
